@@ -5,7 +5,8 @@ Pobieranie danych giełdowych z różnych giełd (GPW, NASDAQ, NYSE, AMEX)
 Zapis do bazy danych - 1 rekord na dzień na spółkę
 """
 
-import mysql.connector
+import psycopg2
+from psycopg2 import extras
 from datetime import date, timedelta
 import time
 import random
@@ -204,13 +205,17 @@ class StockDataCollector:
         """
         # Pobierz ostatnią cenę
         cursor = self.connection.cursor(dictionary=True)
-        query = """
-            SELECT close, open 
-            FROM raw_price_data 
-            WHERE ticker_id = %s AND exchange_code = %s
-            ORDER BY date DESC LIMIT 1
-        """
-        cursor.execute(query, (None, exchange_code))
+         # Resolve exchange_id from code
+         cursor.execute("SELECT exchange_id FROM exchanges WHERE code = %s", (exchange_code,))
+         exch_row = cursor.fetchone()
+         exchange_id = exch_row['exchange_id'] if exch_row else None
+         query = """
+             SELECT close, open 
+             FROM raw_price_data 
+             WHERE ticker_id = %s AND exchange_id = %s
+             ORDER BY date DESC LIMIT 1
+         """
+         cursor.execute(query, (None, exchange_id))
         last_record = cursor.fetchone()
         
         # Jeśli brak danych, generuj losowy start
@@ -239,7 +244,7 @@ class StockDataCollector:
         # Utwórz rekord
         record = {
             'ticker_id': None,  # Ustawione później przez upsert
-            'exchange_code': exchange_code,
+            'exchange_id': exchange_map.get(exchange_code, 0),
             'date': calc_date,
             'open': round(open_price, 6),
             'high': round(high, 6),
@@ -264,7 +269,7 @@ class StockDataCollector:
         
         # Bulk insert dla tickerów (upsert)
         tickers_insert_query = """
-            INSERT IGNORE INTO tickers (exchange_id, symbol, full_name, sector_code)
+            INSERT IGNORE INTO tickers (exchange_id, symbol, full_name, sector)
             VALUES (%s, %s, %s, %s)
         """
         
@@ -279,12 +284,12 @@ class StockDataCollector:
         # Zbierz unikalne tickery i wstaw do bazy
         unique_tickers = {}
         for record in records:
-            key = (record['exchange_code'], record['ticker_symbol'])
+            key = (record['exchange_code'], record['symbol'])
             if key not in unique_tickers:
                 exchange_id = exchange_map.get(record['exchange_code'], 0)
                 unique_tickers[key] = (
                     exchange_id,
-                    record['ticker_symbol'],
+                    record['symbol'],
                     record['full_name'],
                     record['category']
                 )
@@ -297,7 +302,7 @@ class StockDataCollector:
         # Upsert z danymi cenowymi
         upsert_query = """
             INSERT INTO raw_price_data 
-                (ticker_id, exchange_code, date, open, high, low, close, volume)
+                (ticker_id, exchange_id, date, open, high, low, close, volume)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             ON DUPLICATE KEY UPDATE
                 open = VALUES(open),
@@ -312,15 +317,15 @@ class StockDataCollector:
             cursor.execute("""
                 SELECT ticker_id FROM tickers
                 WHERE exchange_id = %s AND symbol = %s
-            """, (unique_tickers[(record['exchange_code'], record['ticker_symbol'])][0],
-                   record['ticker_symbol']))
+""", (unique_tickers[(record['exchange_id'], record['symbol'])][0],
+                    record['symbol']))
             result = cursor.fetchone()
             ticker_id = result[0] if result else None
             
             if ticker_id:
                 values = (
                     ticker_id,
-                    record['exchange_code'],
+                    exchange_map.get(record['exchange_code'], 0),
                     record['date'],
                     record['open'],
                     record['high'],

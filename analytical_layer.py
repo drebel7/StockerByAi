@@ -261,19 +261,19 @@ class TechnicalIndicators:
         inserted = 0
         cursor = self.cursor
         
-        # Grupa rekordów po ticker_id i exchange_code dla batch processing
-        grouped_records: Dict[Tuple[int, str], List[Dict]] = {}
+        # Grupa rekordów po ticker_id i exchange_id dla batch processing
+        grouped_records: Dict[Tuple[int, int], List[Dict]] = {}
         
         for record in records:
-            key = (record['ticker_id'], record['exchange_code'])
+            key = (record['ticker_id'], record['exchange_id'])
             if key not in grouped_records:
                 grouped_records[key] = []
             grouped_records[key].append(record)
         
         # Przetwórz każdy ticker
-        for (ticker_id, exchange_code), tick_records in grouped_records.items():n
+        for (ticker_id, exchange_id), tick_records in grouped_records.items():
                 tick_records.sort(key=lambda x: x['date'])
-                self._process_ticker_indicators(ticker_id, exchange_code, tick_records)
+                self._process_ticker_indicators(ticker_id, exchange_id, tick_records)
                 inserted += len(tick_records)
         
         return inserted
@@ -281,7 +281,7 @@ class TechnicalIndicators:
     def _process_ticker_indicators(
         self,
         ticker_id: int,
-        exchange_code: str,
+        exchange_id: int,
         tick_records: List[Dict]
     ) -> None:
         """
@@ -291,7 +291,7 @@ class TechnicalIndicators:
             return
         
         # Pobierz historyczne dane z bazy (dla ATR, RSI)
-        historical_data = self._get_historical_for_atr(ticker_id, exchange_code)
+        historical_data = self._get_historical_for_atr(ticker_id, exchange_id)
         
         # Inicjalizacja
         current_close = tick_records[0]['close']
@@ -346,7 +346,7 @@ class TechnicalIndicators:
             # Zapis do bazy
             self._upsert_indicator_record(
                 ticker_id,
-                exchange_code,
+                exchange_id,
                 date_str,
                 sma_10, sma_20, sma_50, sma_200,
                 obv_100, adr_30, atr_30,
@@ -359,7 +359,7 @@ class TechnicalIndicators:
     def _get_historical_for_atr(
         self,
         ticker_id: int,
-        exchange_code: str
+        exchange_id: int
     ) -> Dict:
         """
         Pobiera historyczne dane TR z bazy do obliczenia ATR.
@@ -416,7 +416,7 @@ class TechnicalIndicators:
     def _upsert_indicator_record(
         self,
         ticker_id: int,
-        exchange_code: str,
+        exchange_id: int,
         date_str: str,
         sma_10: Optional[float],
         sma_20: Optional[float],
@@ -433,7 +433,7 @@ class TechnicalIndicators:
         """
         query = """
             INSERT INTO technical_indicators 
-                (ticker_id, exchange_code, date,
+                (ticker_id, exchange_id, date,
                  sma_10, sma_20, sma_50, sma_200,
                  obv_100, adr_30, atr_30,
                  avg_volume_50, avg_turnover_50)
@@ -453,7 +453,7 @@ class TechnicalIndicators:
         
         values = (
             ticker_id,
-            exchange_code,
+            exchange_id,
             date_str,
             sma_10, sma_20, sma_50, sma_200,
             obv_100, adr_30, atr_30,
@@ -491,7 +491,7 @@ class TechnicalIndicators:
         while True:
             # Pobierz partię rekordów
             offset_query = """
-                SELECT id, ticker_id, exchange_code, date,
+                SELECT id, ticker_id, exchange_id, date,
                        open, high, low, close, volume
                 FROM raw_price_data
                 WHERE date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
@@ -528,7 +528,7 @@ class TechnicalIndicators:
             end_date = date.today()
         
         query = """
-            SELECT id, ticker_id, exchange_code, date,
+            SELECT id, ticker_id, exchange_id, date,
                    open, high, low, close, volume
             FROM raw_price_data
             WHERE date BETWEEN %s AND %s
@@ -616,7 +616,7 @@ class IndicatorsCalculator:
     def calculate_specific_ticker(
         self,
         ticker_id: int,
-        exchange_code: str,
+        exchange_id: int,
         start_date: date = None
     ) -> Optional[Dict]:
         """
@@ -624,7 +624,7 @@ class IndicatorsCalculator:
         
         Args:
             ticker_id: ID tickera w tabeli tickers
-            exchange_code: Kod giełdy
+            exchange_id: Kod giełdy
             start_date: Data początkowa (opcjonalne)
             
         Returns:
@@ -637,26 +637,26 @@ class IndicatorsCalculator:
         query = """
             SELECT id, date, open, high, low, close, volume
             FROM raw_price_data
-            WHERE ticker_id = %s AND exchange_code = %s
+            WHERE ticker_id = %s AND exchange_id = %s
               AND date >= COALESCE(%s, CURDATE() - INTERVAL 30 DAY)
             ORDER BY date DESC
         """
         
         start_str = str(start_date) if start_date else None
-        cursor.execute(query, (ticker_id, exchange_code, start_str))
+        cursor.execute(query, (ticker_id, exchange_id, start_str))
         records = cursor.fetchall()
         
         if not records:
             return None
         
-        self.indicators._process_ticker_indicators(ticker_id, exchange_code, records)
+        self.indicators._process_ticker_indicators(ticker_id, exchange_id, records)
         
         # Zwróć obliczone wskaźniki
         last_indicator = cursor.execute("""
             SELECT * FROM technical_indicators
-            WHERE ticker_id = %s AND exchange_code = %s
+            WHERE ticker_id = %s AND exchange_id = %s
             ORDER BY date DESC LIMIT 1
-        """, (ticker_id, exchange_code)).fetchone()
+        """, (ticker_id, exchange_id)).fetchone()
         
         return {
             'records': records,
