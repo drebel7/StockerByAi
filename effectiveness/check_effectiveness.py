@@ -1,0 +1,88 @@
+import logging
+import pandas as pd
+from sqlalchemy import text
+from sqlalchemy.dialects.postgresql import insert
+
+from db.models import Signal, SignalEffectiveness, DailyQuote
+from utils.database import engine, get_session
+
+logger = logging.getLogger(__name__)
+
+
+def check_effectiveness(signal_id: int, company_id: int, signal_date, close_at_signal: float,
+                        periods: list = None) -> dict:
+    periods = periods or [10, 20, 50]
+    query = """
+        SELECT date, close, low, high
+        FROM daily_quotes
+        WHERE company_id = :cid AND date > :dt
+        ORDER BY date
+    """
+    df = pd.read_sql(query, engine, params={"cid": company_id, "dt": signal_date},
+                     parse_dates=["date"])
+    if df.empty:
+        return {}
+
+    result = {"signal_id": signal_id, "close_at_signal": close_at_signal,
+              "drawdown_failed": False}
+    result["low_10d"] = float(df.iloc[:min(10, len(df))]["low"].min())
+
+    periods_map = {}
+    for p in periods:
+        if len(df) >= p:
+            end_close = float(df.iloc[p - 1]["close"])
+            periods_map[f"return_{p}d"] = (end_close - close_at_signal) / close_at_signal
+            # check drawdown for bullish signals
+            low_in_period = float(df.iloc[:p]["low"].min())
+            if low_in_period < float(signal_date):
+                pass  # will check below against signal day low
+        else:
+            periods_map[f"return_{p}d"] = None
+
+    result.update(periods_map)
+    result["high_10d"] = float(df.iloc[:min(10, len(df))]["high"].max())
+    return result
+
+
+def compute_effectiveness(batch_size: int = 100):
+    """Iterate over all signals and compute effectiveness."""
+    session = get_session()
+    try:
+        query = """
+            SELECT s.id, s.company_id, s.date, s.value, d.close
+            FROM signals s
+            JOIN daily_quotes d ON d.company_id = s.company_id AND d.date = s.date
+            WHERE s.id NOT IN (SELECT signal_id FROM signal_effectiveness)
+            ORDER BY s.id
+        """
+        rows = session.execute(text(query)).fetchall()
+        logger.info("Checking effectiveness for %d signals", len(rows))
+
+        effective_rows = []
+        for row in rows:
+            result = check_effectiveness(row.id, row.company_id, row.date, float(row.close))
+            if result:
+                result["drawdown_failed"] = (
+                    result.get("low_10d", float("inf")) < float(row.close)
+                    if row.value == 1
+                    else result.get("high_10d", 0) > float(row.close)
+                )
+                effective_rows.append(result)
+
+            if len(effective_rows) >= batch_size:
+                _bulk_insert_effectiveness(effective_rows)
+                effective_rows = []
+
+        if effective_rows:
+            _bulk_insert_effectiveness(effective_rows)
+
+    finally:
+        session.close()
+
+
+def _bulk_insert_effectiveness(rows: list):
+    with engine.begin() as conn:
+        stmt = insert(SignalEffectiveness.__table__).values(rows)
+        stmt = stmt.on_conflict_do_nothing()
+        conn.execute(stmt)
+    logger.info("Inserted %d effectiveness records", len(rows))
