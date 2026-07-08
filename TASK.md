@@ -43,3 +43,8 @@ For each signal type per company: number of occurrences, positive signals, succe
 Aggregates: global across all instruments, per exchange, per company, calendar year.
 All computation layers should be wrapped created in a modularity and efficiency (time and memory) in mind. Can be SQL-based or higher-level language. Functions must be parameterized (e.g. SMA period).
 Mechanisms must be efficient (batch SQL for simple tasks, higher-level code for complex ones).
+
+### User Interface
+There should be a user interface through a browser created. The interface present basic tables with data filtering.
+Where appropriate interface should support basic CRUD operations: e.g. for TA indicators to be calculated.
+There should be computation layer / stage job presentation with basic stats like run times, next run, and stoping, starting capabilities.
