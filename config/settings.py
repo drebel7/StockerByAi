@@ -37,5 +37,9 @@ GPW_TICKERS_FILE = "config/gpw_tickers.json"
 
 YF_SUFFIX = {"GPW": ".WA", "NEWCONNECT": ".WA", "NASDAQ": "", "NYSE": "", "AMEX": ""}
 
+DATA_SOURCES = {"yahoo_finance": "Yahoo Finance"}
+
+INSTRUMENT_TYPE_MAP = {"EQUITY": "stock", "ETF": "etf", "INDEX": "index"}
+
 BATCH_SIZE = 50
 REQUEST_DELAY = 0.5

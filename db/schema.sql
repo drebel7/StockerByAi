@@ -1,93 +1,112 @@
-CREATE TABLE IF NOT EXISTS exchanges (
-    id          SERIAL PRIMARY KEY,
-    code        VARCHAR(20)  NOT NULL UNIQUE,
-    name        VARCHAR(255) NOT NULL,
-    country     VARCHAR(10)  NOT NULL
+DROP TABLE IF EXISTS pipeline_runs CASCADE;
+DROP TABLE IF EXISTS signal_statistics CASCADE;
+DROP TABLE IF EXISTS signal_effectiveness CASCADE;
+DROP TABLE IF EXISTS signals CASCADE;
+DROP TABLE IF EXISTS indicators CASCADE;
+DROP TABLE IF EXISTS daily_quotes CASCADE;
+DROP TABLE IF EXISTS instrument_categories CASCADE;
+DROP TABLE IF EXISTS instruments CASCADE;
+DROP TABLE IF EXISTS categories CASCADE;
+DROP TABLE IF EXISTS data_sources CASCADE;
+DROP TABLE IF EXISTS exchanges CASCADE;
+
+CREATE TABLE exchanges (
+    id      SERIAL PRIMARY KEY,
+    code    VARCHAR(20)  NOT NULL UNIQUE,
+    name    VARCHAR(255) NOT NULL,
+    country VARCHAR(10)  NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS categories (
+CREATE TABLE data_sources (
+    id   SERIAL PRIMARY KEY,
+    code VARCHAR(50)  NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE categories (
     id   SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS companies (
-    id          SERIAL PRIMARY KEY,
-    ticker      VARCHAR(20)  NOT NULL,
-    exchange_id INTEGER      NOT NULL REFERENCES exchanges(id),
-    full_name   VARCHAR(255) NOT NULL,
-    sector      VARCHAR(100),
-    industry    VARCHAR(100),
+CREATE TABLE instruments (
+    id              SERIAL PRIMARY KEY,
+    ticker          VARCHAR(20)  NOT NULL,
+    exchange_id     INTEGER      NOT NULL REFERENCES exchanges(id),
+    full_name       VARCHAR(255) NOT NULL,
+    instrument_type VARCHAR(10)  NOT NULL CHECK (instrument_type IN ('stock', 'index', 'etf')),
+    sector          VARCHAR(100),
+    industry        VARCHAR(100),
     UNIQUE (ticker, exchange_id)
 );
 
-CREATE TABLE IF NOT EXISTS company_categories (
-    company_id  INTEGER NOT NULL REFERENCES companies(id) ON DELETE CASCADE,
-    category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
-    PRIMARY KEY (company_id, category_id)
+CREATE TABLE instrument_categories (
+    instrument_id INTEGER NOT NULL REFERENCES instruments(id) ON DELETE CASCADE,
+    category_id   INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
+    PRIMARY KEY (instrument_id, category_id)
 );
 
-CREATE TABLE IF NOT EXISTS daily_quotes (
-    id          SERIAL PRIMARY KEY,
-    company_id  INTEGER   NOT NULL REFERENCES companies(id) ON DELETE CASCADE,
-    date        DATE      NOT NULL,
-    open        NUMERIC(12, 4),
-    high        NUMERIC(12, 4),
-    low         NUMERIC(12, 4),
-    close       NUMERIC(12, 4),
-    volume      BIGINT,
-    UNIQUE (company_id, date)
-);
+CREATE TABLE daily_quotes (
+    instrument_id  INTEGER NOT NULL REFERENCES instruments(id) ON DELETE CASCADE,
+    date           DATE    NOT NULL,
+    open           REAL,
+    high           REAL,
+    low            REAL,
+    close          REAL,
+    volume         INTEGER,
+    data_source_id INTEGER NOT NULL REFERENCES data_sources(id),
+    UNIQUE (instrument_id, date)
+) PARTITION BY RANGE (date);
 
-CREATE INDEX IF NOT EXISTS idx_daily_quotes_date_company
-    ON daily_quotes (date, company_id);
-
-CREATE TABLE IF NOT EXISTS indicators (
+CREATE TABLE indicators (
     id              SERIAL PRIMARY KEY,
-    company_id      INTEGER       NOT NULL REFERENCES companies(id) ON DELETE CASCADE,
-    date            DATE          NOT NULL,
-    sma_10d         NUMERIC(12, 4),
-    sma_20d         NUMERIC(12, 4),
-    sma_50d         NUMERIC(12, 4),
-    sma_200d        NUMERIC(12, 4),
-    obv_100d        NUMERIC(20, 4),
-    adr_30d         NUMERIC(12, 4),
-    atr_30d         NUMERIC(12, 4),
-    rs_value        NUMERIC(12, 4),
-    avg_volume_50d  NUMERIC(20, 2),
-    avg_turnover_50d NUMERIC(30, 2),
-    UNIQUE (company_id, date)
+    instrument_id   INTEGER NOT NULL REFERENCES instruments(id) ON DELETE CASCADE,
+    date            DATE    NOT NULL,
+    indicator_name  VARCHAR(50) NOT NULL,
+    value           REAL,
+    parameters      VARCHAR(255),
+    UNIQUE (instrument_id, date, indicator_name, parameters)
 );
 
-CREATE TABLE IF NOT EXISTS signals (
-    id          SERIAL PRIMARY KEY,
-    company_id  INTEGER      NOT NULL REFERENCES companies(id) ON DELETE CASCADE,
-    date        DATE         NOT NULL,
-    signal_type VARCHAR(100) NOT NULL,
-    value       SMALLINT     NOT NULL CHECK (value IN (1, -1)),
-    UNIQUE (company_id, date, signal_type)
+CREATE TABLE signals (
+    id             SERIAL PRIMARY KEY,
+    instrument_id  INTEGER      NOT NULL REFERENCES instruments(id) ON DELETE CASCADE,
+    date           DATE         NOT NULL,
+    signal_type    VARCHAR(100) NOT NULL,
+    value          SMALLINT     NOT NULL CHECK (value IN (1, -1)),
+    UNIQUE (instrument_id, date, signal_type)
 );
 
-CREATE TABLE IF NOT EXISTS signal_effectiveness (
-    id                SERIAL PRIMARY KEY,
-    signal_id         INTEGER       NOT NULL REFERENCES signals(id) ON DELETE CASCADE,
-    close_at_signal   NUMERIC(12, 4) NOT NULL,
-    return_10d        NUMERIC(10, 4),
-    return_20d        NUMERIC(10, 4),
-    return_50d        NUMERIC(10, 4),
-    drawdown_failed   BOOLEAN DEFAULT FALSE,
-    low_10d           NUMERIC(12, 4),
-    high_10d          NUMERIC(12, 4)
+CREATE TABLE signal_effectiveness (
+    id              SERIAL PRIMARY KEY,
+    signal_id       INTEGER       NOT NULL REFERENCES signals(id) ON DELETE CASCADE,
+    close_at_signal REAL          NOT NULL,
+    return_10d      REAL,
+    return_20d      REAL,
+    return_50d      REAL,
+    return_100d     REAL,
+    drawdown_failed BOOLEAN DEFAULT FALSE,
+    low_10d         REAL,
+    high_10d        REAL
 );
 
-CREATE TABLE IF NOT EXISTS signal_statistics (
-    id            SERIAL PRIMARY KEY,
-    signal_type   VARCHAR(100) NOT NULL,
-    company_id    INTEGER      REFERENCES companies(id) ON DELETE CASCADE,
-    exchange_id   INTEGER      REFERENCES exchanges(id) ON DELETE CASCADE,
-    year          SMALLINT     NOT NULL,
-    occurrences   INTEGER      NOT NULL DEFAULT 0,
-    positive_count INTEGER     NOT NULL DEFAULT 0,
-    success_rate  NUMERIC(6, 4),
-    avg_return    NUMERIC(10, 4),
-    UNIQUE (signal_type, company_id, exchange_id, year)
+CREATE TABLE pipeline_runs (
+    id           SERIAL PRIMARY KEY,
+    step         VARCHAR(50)  NOT NULL,
+    status       VARCHAR(20)  NOT NULL DEFAULT 'running',
+    started_at   TIMESTAMP    NOT NULL DEFAULT NOW(),
+    finished_at  TIMESTAMP,
+    rows_affected INTEGER
+);
+
+CREATE TABLE signal_statistics (
+    id             SERIAL PRIMARY KEY,
+    signal_type    VARCHAR(100) NOT NULL,
+    instrument_id  INTEGER      REFERENCES instruments(id) ON DELETE CASCADE,
+    exchange_id    INTEGER      REFERENCES exchanges(id) ON DELETE CASCADE,
+    year           SMALLINT     NOT NULL,
+    occurrences    INTEGER      NOT NULL DEFAULT 0,
+    positive_count INTEGER      NOT NULL DEFAULT 0,
+    success_rate   REAL,
+    avg_return     REAL,
+    UNIQUE (signal_type, instrument_id, exchange_id, year)
 );

@@ -11,6 +11,25 @@ def get_session() -> Session:
     return SessionLocal()
 
 
+def ensure_partitions(engine, start_year=2010, end_year=None):
+    from datetime import date
+    end_year = end_year or date.today().year + 1
+    with engine.begin() as conn:
+        for year in range(start_year, end_year + 1):
+            partition_name = f"daily_quotes_{year}"
+            start_date = f"{year}-01-01"
+            end_date = f"{year + 1}-01-01"
+            conn.execute(text(f"""
+                CREATE TABLE IF NOT EXISTS {partition_name}
+                PARTITION OF daily_quotes
+                FOR VALUES FROM ('{start_date}') TO ('{end_date}')
+            """))
+            conn.execute(text(f"""
+                CREATE INDEX IF NOT EXISTS idx_{partition_name}_date_instrument
+                ON {partition_name} (date, instrument_id)
+            """))
+
+
 def execute_sql_file(filepath: str) -> None:
     with open(filepath, "r", encoding="utf-8") as f:
         sql = f.read()

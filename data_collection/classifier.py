@@ -134,7 +134,7 @@ KEYWORD_MAP = {
 }
 
 
-def classify_company(sector: str, industry: str) -> set:
+def classify_instrument(sector: str, industry: str) -> set:
     if not sector and not industry:
         return set()
     text = f"{sector or ''} {industry or ''}".lower()
@@ -147,46 +147,45 @@ def classify_company(sector: str, industry: str) -> set:
     return matched
 
 
-def classify_all_companies(session) -> dict:
-    from db.models import Company, Category, company_categories
-    from sqlalchemy import select
+def classify_all_instruments(session) -> dict:
+    from db.models import Instrument
 
-    companies = session.query(Company).all()
+    instruments = session.query(Instrument).filter(Instrument.instrument_type == "stock").all()
     cat_map = {c.name: c.id for c in session.query(Category).all()}
 
     assignments = {}
-    for comp in companies:
-        matched = classify_company(comp.sector, comp.industry)
+    for inst in instruments:
+        matched = classify_instrument(inst.sector, inst.industry)
         if matched:
-            assignments[comp.id] = matched
+            assignments[inst.id] = matched
 
-    logger.info("Classified %d/%d companies into categories", len(assignments), len(companies))
+    logger.info("Classified %d/%d instruments into categories", len(assignments), len(instruments))
     return assignments
 
 
 def persist_classifications(session, assignments: dict):
     from sqlalchemy.dialects.postgresql import insert
-    from db.models import company_categories as cc_table, Category
+    from db.models import instrument_categories as ic_table, Category
 
     cat_map = {c.name: c.id for c in session.query(Category).all()}
     rows = []
-    for company_id, cat_names in assignments.items():
+    for instrument_id, cat_names in assignments.items():
         for name in cat_names:
             cat_id = cat_map.get(name)
             if cat_id:
-                rows.append({"company_id": company_id, "category_id": cat_id})
+                rows.append({"instrument_id": instrument_id, "category_id": cat_id})
 
     if not rows:
         return 0
 
-    stmt = insert(cc_table).values(rows)
+    stmt = insert(ic_table).values(rows)
     stmt = stmt.on_conflict_do_nothing()
     session.execute(stmt)
     session.commit()
-    logger.info("Inserted %d company-category assignments", len(rows))
+    logger.info("Inserted %d instrument-category assignments", len(rows))
     return len(rows)
 
 
 def classify_and_persist(session):
-    assignments = classify_all_companies(session)
+    assignments = classify_all_instruments(session)
     return persist_classifications(session, assignments)

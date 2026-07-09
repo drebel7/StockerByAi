@@ -13,33 +13,27 @@ from indicators.volume import avg_volume, avg_turnover
 logger = logging.getLogger(__name__)
 
 
-def compute_all_indicators(company_id: int):
-    sma_df = compute_all_sma(company_id)
-    obv_df = obv(company_id, period=100)
-    adr_df = adr(company_id, period=30)
-    atr_df = atr(company_id, period=30)
-    rs_df = rs(company_id)
-    avg_vol_df = avg_volume(company_id, period=50)
-    avg_turn_df = avg_turnover(company_id, period=50)
-
-    merged = sma_df.copy() if not sma_df.empty else pd.DataFrame()
-    for _df in [obv_df, adr_df, atr_df, rs_df, avg_vol_df, avg_turn_df]:
-        if merged.empty:
-            merged = _df.copy()
-        elif not _df.empty:
-            merged = merged.merge(_df, on=["date", "company_id"], how="outer")
-
-    if merged.empty:
+def compute_all_indicators(instrument_id: int):
+    dfs = [
+        compute_all_sma(instrument_id),
+        obv(instrument_id, period=100),
+        adr(instrument_id, period=30),
+        atr(instrument_id, period=30),
+        rs(instrument_id),
+        avg_volume(instrument_id, period=50),
+        avg_turnover(instrument_id, period=50),
+    ]
+    dfs = [d for d in dfs if not d.empty]
+    if not dfs:
         return 0
 
-    rows = merged.to_dict(orient="records")
+    combined = pd.concat(dfs, ignore_index=True)
+    rows = combined.to_dict(orient="records")
     with engine.begin() as conn:
         stmt = insert(Indicator.__table__).values(rows)
-        stmt = stmt.on_conflict_do_update(
-            index_elements=["company_id", "date"],
-            set_={c.name: stmt.excluded[c.name] for c in Indicator.__table__.columns
-                  if c.name not in ("id", "company_id", "date") and c.name in merged.columns},
+        stmt = stmt.on_conflict_do_nothing(
+            index_elements=["instrument_id", "date", "indicator_name", "parameters"]
         )
         conn.execute(stmt)
-    logger.info("Stored %d indicator rows for company %d", len(rows), company_id)
+    logger.info("Stored %d indicator rows for instrument %d", len(rows), instrument_id)
     return len(rows)

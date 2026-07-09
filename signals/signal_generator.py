@@ -4,7 +4,7 @@ from sqlalchemy.dialects.postgresql import insert
 
 from db.models import Signal
 from utils.database import engine, get_session
-from indicators.base import load_quotes, store_indicators
+from indicators.base import load_quotes
 
 logger = logging.getLogger(__name__)
 
@@ -26,15 +26,9 @@ def get_signal(name):
 
 
 @register_signal("volume_breakout")
-def volume_breakout_signal(company_id: int, lookback_days: int = 14, min_days: int = 3,
+def volume_breakout_signal(instrument_id: int, lookback_days: int = 14, min_days: int = 3,
                            min_change_pct: float = 1.7) -> pd.DataFrame:
-    """
-    Positive signal: at least `min_days` within `lookback_days` where:
-      - volume > avg_volume_50d
-      - volume > previous day volume
-      - 1D change > min_change_pct%
-    """
-    df = load_quotes(company_id)
+    df = load_quotes(instrument_id)
     if df.empty or len(df) < lookback_days + 50:
         return pd.DataFrame()
 
@@ -56,21 +50,61 @@ def volume_breakout_signal(company_id: int, lookback_days: int = 14, min_days: i
     result = df[df["signal"] != 0][["date", "signal"]].copy()
     if result.empty:
         return pd.DataFrame()
-    result["company_id"] = company_id
+    result["instrument_id"] = instrument_id
     result["signal_type"] = "volume_breakout"
     result.rename(columns={"signal": "value"}, inplace=True)
-    return result
+    return result[["date", "value", "instrument_id", "signal_type"]]
 
 
-def compute_all_signals(company_id: int):
+@register_signal("golden_cross")
+def golden_cross_signal(instrument_id: int) -> pd.DataFrame:
+    from sqlalchemy import text
+    from utils.database import engine
+
+    query = text("""
+        SELECT i1.date,
+               i1.value AS sma_50,
+               i2.value AS sma_200
+        FROM indicators i1
+        JOIN indicators i2
+          ON i1.instrument_id = i2.instrument_id
+         AND i1.date = i2.date
+        WHERE i1.instrument_id = :iid
+          AND i1.indicator_name = 'sma' AND i1.parameters = '50'
+          AND i2.indicator_name = 'sma' AND i2.parameters = '200'
+        ORDER BY i1.date
+    """)
+    with engine.connect() as conn:
+        df = pd.read_sql(query, conn, params={"iid": instrument_id}, parse_dates=["date"])
+
+    if df.empty or len(df) < 2:
+        return pd.DataFrame()
+
+    df["prev_sma_50"] = df["sma_50"].shift(1)
+    df["prev_sma_200"] = df["sma_200"].shift(1)
+
+    df["signal"] = 0
+    df.loc[(df["prev_sma_50"] <= df["prev_sma_200"]) & (df["sma_50"] > df["sma_200"]), "signal"] = 1
+    df.loc[(df["prev_sma_50"] >= df["prev_sma_200"]) & (df["sma_50"] < df["sma_200"]), "signal"] = -1
+
+    result = df[df["signal"] != 0][["date", "signal"]].copy()
+    if result.empty:
+        return pd.DataFrame()
+    result["instrument_id"] = instrument_id
+    result["signal_type"] = "golden_cross"
+    result.rename(columns={"signal": "value"}, inplace=True)
+    return result[["date", "value", "instrument_id", "signal_type"]]
+
+
+def compute_all_signals(instrument_id: int):
     results = []
     for name, func in SIGNAL_REGISTRY.items():
         try:
-            df = func(company_id)
+            df = func(instrument_id)
             if not df.empty:
                 results.append(df)
         except Exception as e:
-            logger.error("Signal %s failed for company %d: %s", name, company_id, e)
+            logger.error("Signal %s failed for instrument %d: %s", name, instrument_id, e)
 
     if not results:
         return 0
@@ -79,7 +113,7 @@ def compute_all_signals(company_id: int):
     with engine.begin() as conn:
         stmt = insert(Signal.__table__).values(rows)
         stmt = stmt.on_conflict_do_nothing(
-            index_elements=["company_id", "date", "signal_type"]
+            index_elements=["instrument_id", "date", "signal_type"]
         )
         conn.execute(stmt)
     return len(rows)

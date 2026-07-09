@@ -9,16 +9,16 @@ from utils.database import engine, get_session
 logger = logging.getLogger(__name__)
 
 
-def check_effectiveness(signal_id: int, company_id: int, signal_date, close_at_signal: float,
+def check_effectiveness(signal_id: int, instrument_id: int, signal_date, close_at_signal: float,
                         periods: list = None) -> dict:
-    periods = periods or [10, 20, 50]
+    periods = periods or [10, 20, 50, 100]
     query = """
         SELECT date, close, low, high
         FROM daily_quotes
-        WHERE company_id = :cid AND date > :dt
+        WHERE instrument_id = :iid AND date > :dt
         ORDER BY date
     """
-    df = pd.read_sql(query, engine, params={"cid": company_id, "dt": signal_date},
+    df = pd.read_sql(query, engine, params={"iid": instrument_id, "dt": signal_date},
                      parse_dates=["date"])
     if df.empty:
         return {}
@@ -32,10 +32,6 @@ def check_effectiveness(signal_id: int, company_id: int, signal_date, close_at_s
         if len(df) >= p:
             end_close = float(df.iloc[p - 1]["close"])
             periods_map[f"return_{p}d"] = (end_close - close_at_signal) / close_at_signal
-            # check drawdown for bullish signals
-            low_in_period = float(df.iloc[:p]["low"].min())
-            if low_in_period < float(signal_date):
-                pass  # will check below against signal day low
         else:
             periods_map[f"return_{p}d"] = None
 
@@ -45,13 +41,12 @@ def check_effectiveness(signal_id: int, company_id: int, signal_date, close_at_s
 
 
 def compute_effectiveness(batch_size: int = 100):
-    """Iterate over all signals and compute effectiveness."""
     session = get_session()
     try:
         query = """
-            SELECT s.id, s.company_id, s.date, s.value, d.close
+            SELECT s.id, s.instrument_id, s.date, s.value, d.close
             FROM signals s
-            JOIN daily_quotes d ON d.company_id = s.company_id AND d.date = s.date
+            JOIN daily_quotes d ON d.instrument_id = s.instrument_id AND d.date = s.date
             WHERE s.id NOT IN (SELECT signal_id FROM signal_effectiveness)
             ORDER BY s.id
         """
@@ -60,7 +55,7 @@ def compute_effectiveness(batch_size: int = 100):
 
         effective_rows = []
         for row in rows:
-            result = check_effectiveness(row.id, row.company_id, row.date, float(row.close))
+            result = check_effectiveness(row.id, row.instrument_id, row.date, float(row.close))
             if result:
                 result["drawdown_failed"] = (
                     result.get("low_10d", float("inf")) < float(row.close)

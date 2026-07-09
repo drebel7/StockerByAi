@@ -8,8 +8,8 @@ import yfinance as yf
 from sqlalchemy.dialects.postgresql import insert
 
 from config.settings import BACKFILL_START_YEAR, YF_SUFFIX, BATCH_SIZE, REQUEST_DELAY
-from data_collection.companies import get_all_tickers
-from db.models import Company, DailyQuote, Exchange
+from data_collection.instruments import get_all_tickers
+from db.models import Instrument, DailyQuote, Exchange, DataSource
 from utils.database import get_session, engine
 
 logger = logging.getLogger(__name__)
@@ -19,9 +19,14 @@ def _get_exchange_map(session) -> dict:
     return {row.code: row.id for row in session.query(Exchange).all()}
 
 
-def _get_company_map(session) -> dict:
-    rows = session.query(Company.ticker, Company.exchange_id, Company.id).all()
+def _get_instrument_map(session) -> dict:
+    rows = session.query(Instrument.ticker, Instrument.exchange_id, Instrument.id).all()
     return {(r.ticker, r.exchange_id): r.id for r in rows}
+
+
+def _get_data_source_id(session) -> int:
+    ds = session.query(DataSource).filter_by(code="yahoo_finance").first()
+    return ds.id if ds else 1
 
 
 def download_batch_quotes(
@@ -87,32 +92,35 @@ def bulk_upsert_quotes(df: pd.DataFrame) -> int:
     session = get_session()
     try:
         ex_map = _get_exchange_map(session)
-        co_map = _get_company_map(session)
+        inst_map = _get_instrument_map(session)
+        ds_id = _get_data_source_id(session)
 
         df["exchange_id"] = df["exchange"].map(ex_map)
         df = df.dropna(subset=["exchange_id"])
         df["exchange_id"] = df["exchange_id"].astype(int)
 
-        df["company_id"] = df.apply(
-            lambda r: co_map.get((r["ticker"], r["exchange_id"])), axis=1
+        df["instrument_id"] = df.apply(
+            lambda r: inst_map.get((r["ticker"], r["exchange_id"])), axis=1
         )
-        df = df.dropna(subset=["company_id"])
+        df = df.dropna(subset=["instrument_id"])
         if df.empty:
             return 0
 
-        df["company_id"] = df["company_id"].astype(int)
-        rows = df[["company_id", "date", "open", "high", "low", "close", "volume"]].to_dict(orient="records")
+        df["instrument_id"] = df["instrument_id"].astype(int)
+        df["data_source_id"] = ds_id
+        rows = df[["instrument_id", "date", "open", "high", "low", "close", "volume", "data_source_id"]].to_dict(orient="records")
 
         with engine.begin() as conn:
             stmt = insert(DailyQuote.__table__).values(rows)
             stmt = stmt.on_conflict_do_update(
-                index_elements=["company_id", "date"],
+                index_elements=["instrument_id", "date"],
                 set_={
                     "open": stmt.excluded.open,
                     "high": stmt.excluded.high,
                     "low": stmt.excluded.low,
                     "close": stmt.excluded.close,
                     "volume": stmt.excluded.volume,
+                    "data_source_id": stmt.excluded.data_source_id,
                 },
             )
             conn.execute(stmt)
@@ -131,7 +139,7 @@ def download_all_quotes(exchanges: Optional[list] = None):
         logger.info("Downloading %d tickers for %s", len(ticker_names), exchange)
 
         for i in range(0, len(ticker_names), BATCH_SIZE):
-            batch = ticker_names[i : i + BATCH_SIZE]
+            batch = ticker_names[i: i + BATCH_SIZE]
             df = download_batch_quotes(batch, exchange)
             if not df.empty:
                 count = bulk_upsert_quotes(df)

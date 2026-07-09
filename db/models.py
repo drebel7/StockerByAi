@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Numeric, Date, SmallInteger, Boolean, BigInteger, ForeignKey, UniqueConstraint, Table
+from sqlalchemy import Column, Integer, String, Float, Date, DateTime, SmallInteger, Boolean, ForeignKey, UniqueConstraint, Table
 from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
@@ -11,7 +11,14 @@ class Exchange(Base):
     name = Column(String(255), nullable=False)
     country = Column(String(10), nullable=False)
 
-    companies = relationship("Company", back_populates="exchange")
+    instruments = relationship("Instrument", back_populates="exchange")
+
+
+class DataSource(Base):
+    __tablename__ = "data_sources"
+    id = Column(Integer, primary_key=True)
+    code = Column(String(50), unique=True, nullable=False)
+    name = Column(String(255), nullable=False)
 
 
 class Category(Base):
@@ -20,90 +27,95 @@ class Category(Base):
     name = Column(String(100), unique=True, nullable=False)
 
 
-company_categories = Table(
-    "company_categories", Base.metadata,
-    Column("company_id", Integer, ForeignKey("companies.id"), primary_key=True),
+instrument_categories = Table(
+    "instrument_categories", Base.metadata,
+    Column("instrument_id", Integer, ForeignKey("instruments.id"), primary_key=True),
     Column("category_id", Integer, ForeignKey("categories.id"), primary_key=True),
 )
 
 
-class Company(Base):
-    __tablename__ = "companies"
+class Instrument(Base):
+    __tablename__ = "instruments"
     id = Column(Integer, primary_key=True)
     ticker = Column(String(20), nullable=False)
     exchange_id = Column(Integer, ForeignKey("exchanges.id"), nullable=False)
     full_name = Column(String(255), nullable=False)
+    instrument_type = Column(String(10), nullable=False)
     sector = Column(String(100))
     industry = Column(String(100))
     __table_args__ = (UniqueConstraint("ticker", "exchange_id"),)
 
-    exchange = relationship("Exchange", back_populates="companies")
-    categories = relationship("Category", secondary=company_categories)
+    exchange = relationship("Exchange", back_populates="instruments")
+    categories = relationship("Category", secondary=instrument_categories)
 
 
 class DailyQuote(Base):
     __tablename__ = "daily_quotes"
-    id = Column(Integer, primary_key=True)
-    company_id = Column(Integer, ForeignKey("companies.id"), nullable=False)
-    date = Column(Date, nullable=False)
-    open = Column(Numeric(12, 4))
-    high = Column(Numeric(12, 4))
-    low = Column(Numeric(12, 4))
-    close = Column(Numeric(12, 4))
-    volume = Column(BigInteger)
-    __table_args__ = (UniqueConstraint("company_id", "date"),)
+    instrument_id = Column(Integer, ForeignKey("instruments.id"), nullable=False, primary_key=True)
+    date = Column(Date, nullable=False, primary_key=True)
+    open = Column(Float)
+    high = Column(Float)
+    low = Column(Float)
+    close = Column(Float)
+    volume = Column(Integer)
+    data_source_id = Column(Integer, ForeignKey("data_sources.id"), nullable=False)
+    __table_args__ = (UniqueConstraint("instrument_id", "date"),)
 
 
 class Indicator(Base):
     __tablename__ = "indicators"
     id = Column(Integer, primary_key=True)
-    company_id = Column(Integer, ForeignKey("companies.id"), nullable=False)
+    instrument_id = Column(Integer, ForeignKey("instruments.id"), nullable=False)
     date = Column(Date, nullable=False)
-    sma_10d = Column(Numeric(12, 4))
-    sma_20d = Column(Numeric(12, 4))
-    sma_50d = Column(Numeric(12, 4))
-    sma_200d = Column(Numeric(12, 4))
-    obv_100d = Column(Numeric(20, 4))
-    adr_30d = Column(Numeric(12, 4))
-    atr_30d = Column(Numeric(12, 4))
-    rs_value = Column(Numeric(12, 4))
-    avg_volume_50d = Column(Numeric(20, 2))
-    avg_turnover_50d = Column(Numeric(30, 2))
-    __table_args__ = (UniqueConstraint("company_id", "date"),)
+    indicator_name = Column(String(50), nullable=False)
+    value = Column(Float)
+    parameters = Column(String(255))
+    __table_args__ = (UniqueConstraint("instrument_id", "date", "indicator_name", "parameters"),)
 
 
 class Signal(Base):
     __tablename__ = "signals"
     id = Column(Integer, primary_key=True)
-    company_id = Column(Integer, ForeignKey("companies.id"), nullable=False)
+    instrument_id = Column(Integer, ForeignKey("instruments.id"), nullable=False)
     date = Column(Date, nullable=False)
     signal_type = Column(String(100), nullable=False)
     value = Column(SmallInteger, nullable=False)
-    __table_args__ = (UniqueConstraint("company_id", "date", "signal_type"),)
+    __table_args__ = (UniqueConstraint("instrument_id", "date", "signal_type"),)
 
 
 class SignalEffectiveness(Base):
     __tablename__ = "signal_effectiveness"
     id = Column(Integer, primary_key=True)
     signal_id = Column(Integer, ForeignKey("signals.id"), nullable=False)
-    close_at_signal = Column(Numeric(12, 4), nullable=False)
-    return_10d = Column(Numeric(10, 4))
-    return_20d = Column(Numeric(10, 4))
-    return_50d = Column(Numeric(10, 4))
+    close_at_signal = Column(Float, nullable=False)
+    return_10d = Column(Float)
+    return_20d = Column(Float)
+    return_50d = Column(Float)
+    return_100d = Column(Float)
     drawdown_failed = Column(Boolean, default=False)
-    low_10d = Column(Numeric(12, 4))
-    high_10d = Column(Numeric(12, 4))
+    low_10d = Column(Float)
+    high_10d = Column(Float)
+
+
+class PipelineRun(Base):
+    __tablename__ = "pipeline_runs"
+    id = Column(Integer, primary_key=True)
+    step = Column(String(50), nullable=False)
+    status = Column(String(20), nullable=False, default="running")
+    started_at = Column(DateTime, nullable=False)
+    finished_at = Column(DateTime)
+    rows_affected = Column(Integer)
 
 
 class SignalStatistic(Base):
     __tablename__ = "signal_statistics"
     id = Column(Integer, primary_key=True)
     signal_type = Column(String(100), nullable=False)
-    company_id = Column(Integer, ForeignKey("companies.id"))
+    instrument_id = Column(Integer, ForeignKey("instruments.id"))
     exchange_id = Column(Integer, ForeignKey("exchanges.id"))
     year = Column(SmallInteger, nullable=False)
     occurrences = Column(Integer, nullable=False, default=0)
     positive_count = Column(Integer, nullable=False, default=0)
-    success_rate = Column(Numeric(6, 4))
-    avg_return = Column(Numeric(10, 4))
-    __table_args__ = (UniqueConstraint("signal_type", "company_id", "exchange_id", "year"),)
+    success_rate = Column(Float)
+    avg_return = Column(Float)
+    __table_args__ = (UniqueConstraint("signal_type", "instrument_id", "exchange_id", "year"),)

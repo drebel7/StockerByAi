@@ -12,8 +12,8 @@ def compute_statistics():
     query = """
         SELECT
             s.signal_type,
-            s.company_id,
-            c.exchange_id,
+            s.instrument_id,
+            i.exchange_id,
             EXTRACT(YEAR FROM s.date)::smallint AS year,
             COUNT(*) AS occurrences,
             SUM(CASE WHEN se.drawdown_failed = FALSE THEN 1 ELSE 0 END) AS positive_count,
@@ -25,9 +25,9 @@ def compute_statistics():
             AVG(se.return_10d) AS avg_return
         FROM signals s
         JOIN signal_effectiveness se ON se.signal_id = s.id
-        JOIN companies c ON c.id = s.company_id
-        GROUP BY s.signal_type, s.company_id, c.exchange_id, EXTRACT(YEAR FROM s.date)
-        ORDER BY s.signal_type, s.company_id, year
+        JOIN instruments i ON i.id = s.instrument_id
+        GROUP BY s.signal_type, s.instrument_id, i.exchange_id, EXTRACT(YEAR FROM s.date)
+        ORDER BY s.signal_type, s.instrument_id, year
     """
     with engine.connect() as conn:
         rows = conn.execute(text(query)).fetchall()
@@ -40,7 +40,7 @@ def compute_statistics():
     for r in rows:
         stats.append({
             "signal_type": r.signal_type,
-            "company_id": r.company_id,
+            "instrument_id": r.instrument_id,
             "exchange_id": r.exchange_id,
             "year": r.year,
             "occurrences": r.occurrences,
@@ -52,7 +52,7 @@ def compute_statistics():
     with engine.begin() as conn:
         stmt = insert(SignalStatistic.__table__).values(stats)
         stmt = stmt.on_conflict_do_update(
-            index_elements=["signal_type", "company_id", "exchange_id", "year"],
+            index_elements=["signal_type", "instrument_id", "exchange_id", "year"],
             set_={
                 "occurrences": stmt.excluded.occurrences,
                 "positive_count": stmt.excluded.positive_count,

@@ -1,27 +1,27 @@
 import pandas as pd
-from indicators.base import load_quotes, store_indicators
+import talib
+from indicators.base import load_quotes
 
 
-def sma(company_id: int, period: int) -> pd.DataFrame:
-    df = load_quotes(company_id)
+def sma(instrument_id: int, period: int) -> pd.DataFrame:
+    df = load_quotes(instrument_id)
     if len(df) < period:
         return pd.DataFrame()
     col = f"sma_{period}d"
-    df[col] = df["close"].rolling(window=period).mean()
-    result = df[["date"]].copy()
-    result["company_id"] = company_id
-    result[col] = df[col]
-    return result.dropna(subset=[col])
+    df[col] = talib.SMA(df["close"].values, timeperiod=period)
+    result = df[["date", col]].dropna(subset=[col]).copy()
+    result["instrument_id"] = instrument_id
+    result["indicator_name"] = "sma"
+    result["value"] = result[col]
+    result["parameters"] = str(period)
+    return result[["date", "instrument_id", "indicator_name", "value", "parameters"]]
 
 
-def compute_all_sma(company_id: int) -> pd.DataFrame:
+def compute_all_sma(instrument_id: int) -> pd.DataFrame:
     periods = [10, 20, 50, 200]
-    df = load_quotes(company_id)
-    if df.empty:
-        return pd.DataFrame()
+    results = []
     for p in periods:
-        df[f"sma_{p}d"] = df["close"].rolling(window=p).mean()
-    cols = ["date"] + [f"sma_{p}d" for p in periods]
-    result = df[cols].copy()
-    result["company_id"] = company_id
-    return result.dropna(subset=[f"sma_{max(periods)}d"])
+        df = sma(instrument_id, period=p)
+        if not df.empty:
+            results.append(df)
+    return pd.concat(results, ignore_index=True) if results else pd.DataFrame()

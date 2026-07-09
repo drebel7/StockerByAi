@@ -6,20 +6,20 @@ from indicators.base import load_quotes, engine
 from config.settings import BNCHMARK_INDEX, REQUEST_DELAY, BACKFILL_START_YEAR
 
 
-def _get_company_country(company_id: int) -> str:
+def _get_instrument_country(instrument_id: int) -> str:
     query = """
         SELECT e.country
-        FROM companies c
-        JOIN exchanges e ON c.exchange_id = e.id
-        WHERE c.id = :cid
+        FROM instruments i
+        JOIN exchanges e ON i.exchange_id = e.id
+        WHERE i.id = :iid
     """
     with engine.connect() as conn:
-        row = conn.execute(text(query), {"cid": company_id}).fetchone()
+        row = conn.execute(text(query), {"iid": instrument_id}).fetchone()
     return row[0] if row else "US"
 
 
-def _get_benchmark_quotes(company_id: int) -> pd.DataFrame:
-    country = _get_company_country(company_id)
+def _get_benchmark_quotes(instrument_id: int) -> pd.DataFrame:
+    country = _get_instrument_country(instrument_id)
     bench_ticker = BNCHMARK_INDEX.get(country, "^GSPC")
     df = yf.download(bench_ticker, start=f"{BACKFILL_START_YEAR}-01-01", progress=False, auto_adjust=True)
     time.sleep(REQUEST_DELAY)
@@ -31,16 +31,18 @@ def _get_benchmark_quotes(company_id: int) -> pd.DataFrame:
     return df
 
 
-def rs(company_id: int) -> pd.DataFrame:
-    df = load_quotes(company_id)
-    bench = _get_benchmark_quotes(company_id)
+def rs(instrument_id: int) -> pd.DataFrame:
+    df = load_quotes(instrument_id)
+    bench = _get_benchmark_quotes(instrument_id)
     if df.empty or bench.empty:
         return pd.DataFrame()
     merged = df[["date", "close"]].merge(bench[["bench_close"]], left_on="date", right_index=True, how="inner")
     merged["stock_return"] = merged["close"].pct_change()
     merged["bench_return"] = merged["bench_close"].pct_change()
     merged["rs_value"] = (1 + merged["stock_return"]).cumprod() / (1 + merged["bench_return"]).cumprod()
-    result = merged[["date"]].copy()
-    result["company_id"] = company_id
-    result["rs_value"] = merged["rs_value"]
-    return result.dropna(subset=["rs_value"])
+    result = merged[["date", "rs_value"]].dropna(subset=["rs_value"]).copy()
+    result["instrument_id"] = instrument_id
+    result["indicator_name"] = "rs"
+    result["value"] = result["rs_value"]
+    result["parameters"] = None
+    return result[["date", "instrument_id", "indicator_name", "value", "parameters"]]
