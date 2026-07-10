@@ -148,7 +148,7 @@ def classify_instrument(sector: str, industry: str) -> set:
 
 
 def classify_all_instruments(session) -> dict:
-    from db.models import Instrument
+    from db.models import Instrument, Category
 
     instruments = session.query(Instrument).filter(Instrument.instrument_type == "stock").all()
     cat_map = {c.name: c.id for c in session.query(Category).all()}

@@ -108,22 +108,30 @@ def bulk_upsert_quotes(df: pd.DataFrame) -> int:
 
         df["instrument_id"] = df["instrument_id"].astype(int)
         df["data_source_id"] = ds_id
+
+        from utils.database import ensure_partitions
+        ensure_partitions(engine)
+
         rows = df[["instrument_id", "date", "open", "high", "low", "close", "volume", "data_source_id"]].to_dict(orient="records")
 
         with engine.begin() as conn:
-            stmt = insert(DailyQuote.__table__).values(rows)
-            stmt = stmt.on_conflict_do_update(
-                index_elements=["instrument_id", "date"],
-                set_={
-                    "open": stmt.excluded.open,
-                    "high": stmt.excluded.high,
-                    "low": stmt.excluded.low,
-                    "close": stmt.excluded.close,
-                    "volume": stmt.excluded.volume,
-                    "data_source_id": stmt.excluded.data_source_id,
-                },
-            )
-            conn.execute(stmt)
+            # Insert in chunks of 2000 rows to avoid PostgreSQL parameter limit (~32767)
+            chunk_size = 2000
+            for i in range(0, len(rows), chunk_size):
+                chunk = rows[i:i + chunk_size]
+                stmt = insert(DailyQuote.__table__).values(chunk)
+                stmt = stmt.on_conflict_do_update(
+                    index_elements=["instrument_id", "date"],
+                    set_={
+                        "open": stmt.excluded.open,
+                        "high": stmt.excluded.high,
+                        "low": stmt.excluded.low,
+                        "close": stmt.excluded.close,
+                        "volume": stmt.excluded.volume,
+                        "data_source_id": stmt.excluded.data_source_id,
+                    },
+                )
+                conn.execute(stmt)
         return len(rows)
     finally:
         session.close()

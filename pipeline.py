@@ -61,7 +61,9 @@ def _log_run(step: str, func, *args, **kwargs):
 
 
 def run_schema():
-    _log_run("schema", lambda: (execute_sql_file("db/schema.sql"), ensure_partitions(engine)))
+    logger.info("Step 1: Creating DB schema...")
+    execute_sql_file("db/schema.sql")
+    ensure_partitions(engine)
 
 
 def run_seed():
@@ -161,4 +163,10 @@ def run_pipeline(steps: list[str] = None):
 
 
 if __name__ == "__main__":
-    run_pipeline()
+    import sys
+    if "--steps" in sys.argv:
+        idx = sys.argv.index("--steps")
+        steps = sys.argv[idx + 1].split(",")
+        run_pipeline(steps)
+    else:
+        run_pipeline()
