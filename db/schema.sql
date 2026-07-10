@@ -52,7 +52,7 @@ CREATE TABLE daily_quotes (
     high           REAL,
     low            REAL,
     close          REAL,
-    volume         INTEGER,
+    volume         BIGINT,
     data_source_id INTEGER NOT NULL REFERENCES data_sources(id),
     UNIQUE (instrument_id, date)
 ) PARTITION BY RANGE (date);
@@ -110,3 +110,12 @@ CREATE TABLE signal_statistics (
     avg_return     REAL,
     UNIQUE (signal_type, instrument_id, exchange_id, year)
 );
+
+CREATE OR REPLACE VIEW v_daily_quotes AS
+SELECT e.code, i.ticker, i.full_name
+     , i.industry, i.sector
+     , dq."date", dq."open", dq.low, dq.high, dq.close, dq.volume
+     , round(dq.close * dq.volume) turnover
+FROM daily_quotes dq
+         JOIN instruments i ON i.id = dq.instrument_id
+         JOIN exchanges e ON e.id = i.exchange_id;
