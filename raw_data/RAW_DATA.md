@@ -8,4 +8,4 @@ Might be useful to have a few raw data + sources for future use in the system. F
 * TSX stocks (source?: https://www.eoddata.com/download.aspx?e=TSX)
 * ASX stocks
 * GPW + NewConnect stock quotes - maybe from https://bossa.pl/oferta/pliki-z-danymi/intraday (needs login and 2fa)
-* 
+* GPW: quotes, total shares outstanding, sector, industry: https://www.gpw.pl/spolka?isin=PLKETY000011#indicatorsTab
