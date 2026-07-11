@@ -8,7 +8,7 @@ def sma(instrument_id: int, period: int) -> pd.DataFrame:
     if len(df) < period:
         return pd.DataFrame()
     col = f"sma_{period}d"
-    df[col] = talib.SMA(df["close"].values, timeperiod=period)
+    df[col] = talib.SMA(df["close"].astype(float).values, timeperiod=period)
     result = df[["date", col]].dropna(subset=[col]).copy()
     result["instrument_id"] = instrument_id
     result["indicator_name"] = "sma"
