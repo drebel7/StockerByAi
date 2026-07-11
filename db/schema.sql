@@ -121,7 +121,7 @@ FROM daily_quotes dq
          JOIN exchanges e ON e.id = i.exchange_id;
 
 create or replace view v_instrument_dates as
-select i.id, e.code, i.full_name, min(dq.date) min_dt, max(dq.date) max_dt, count(dq.instrument_id) quotes_count
+select i.id, e.code exchange, i.full_name, min(dq.date) min_dt, max(dq.date) max_dt, count(dq.instrument_id) quotes_count
 from instruments i
          join exchanges e on e.id = i.exchange_id
          left join daily_quotes dq on dq.instrument_id = i.id
