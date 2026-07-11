@@ -119,3 +119,10 @@ SELECT e.code, i.ticker, i.full_name
 FROM daily_quotes dq
          JOIN instruments i ON i.id = dq.instrument_id
          JOIN exchanges e ON e.id = i.exchange_id;
+
+create or replace view v_instrument_dates as
+select i.id, e.code, i.full_name, min(dq.date) min_dt, max(dq.date) max_dt, count(*) quotes_count
+from instruments i
+         join exchanges e on e.id = i.exchange_id
+         left join daily_quotes dq on dq.instrument_id = i.id
+group by i.id, e.code, i.full_name;
