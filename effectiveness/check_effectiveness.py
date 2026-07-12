@@ -1,6 +1,6 @@
 import logging
 import pandas as pd
-from sqlalchemy import text
+from sqlalchemy import text as sa_text
 from sqlalchemy.dialects.postgresql import insert
 
 from db.models import Signal, SignalEffectiveness, DailyQuote
@@ -12,12 +12,12 @@ logger = logging.getLogger(__name__)
 def check_effectiveness(signal_id: int, instrument_id: int, signal_date, close_at_signal: float,
                         periods: list = None) -> dict:
     periods = periods or [10, 20, 50, 100]
-    query = """
+    query = sa_text("""
         SELECT date, close, low, high
         FROM daily_quotes
         WHERE instrument_id = :iid AND date > :dt
         ORDER BY date
-    """
+    """)
     df = pd.read_sql(query, engine, params={"iid": instrument_id, "dt": signal_date},
                      parse_dates=["date"])
     if df.empty:
@@ -50,7 +50,7 @@ def compute_effectiveness(batch_size: int = 100):
             WHERE s.id NOT IN (SELECT signal_id FROM signal_effectiveness)
             ORDER BY s.id
         """
-        rows = session.execute(text(query)).fetchall()
+        rows = session.execute(sa_text(query)).fetchall()
         logger.info("Checking effectiveness for %d signals", len(rows))
 
         effective_rows = []
