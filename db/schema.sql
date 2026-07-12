@@ -126,3 +126,10 @@ from instruments i
          join exchanges e on e.id = i.exchange_id
          left join daily_quotes dq on dq.instrument_id = i.id
 group by i.id, e.code, i.full_name;
+
+create or replace view v_instrument_categories as
+select e.code  , i.ticker, i.full_name, c."name"
+from instruments i
+         join exchanges e on e.id = i.exchange_id
+         join instrument_categories ic on ic.instrument_id = i.id
+         join categories c on c.id = ic.category_id;
