@@ -7,7 +7,7 @@ def seed_exchanges(session):
     for code, info in EXCHANGES.items():
         existing = session.query(Exchange).filter_by(code=code).first()
         if not existing:
-            session.add(Exchange(code=code, name=info["name"], country=info["country"]))
+            session.add(Exchange(code=code, name=info["name"], country=info["country"], active=True))
     session.commit()
     print(f"Seeded {len(EXCHANGES)} exchanges.")
 
@@ -68,6 +68,11 @@ def seed_index_instruments(session):
     print(f"Seeded {count} index instruments.")
 
 
+def seed_ibd_categories(session):
+    from data_collection.ibd_classifier import seed_ibd_categories
+    seed_ibd_categories(session)
+
+
 def main():
     execute_sql_file("db/schema.sql")
     session = get_session()
@@ -75,6 +80,7 @@ def main():
         seed_exchanges(session)
         seed_data_sources(session)
         seed_categories(session)
+        seed_ibd_categories(session)
         seed_index_instruments(session)
     finally:
         session.close()

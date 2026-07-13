@@ -7,12 +7,9 @@ def obv(instrument_id: int, period: int = 100) -> pd.DataFrame:
     df = load_quotes(instrument_id)
     if df.empty:
         return pd.DataFrame()
-    obv_values = talib.OBV(df["close"].astype(float).values, df["volume"].astype(float).values)
-    col = f"obv_{period}d"
+    obv_values = talib.OBV(df["close_price"].astype(float).values, df["volume"].astype(float).values)
+    col = f"obv_{period}"
     df[col] = talib.SMA(obv_values, timeperiod=period)
-    result = df[["date", col]].dropna(subset=[col]).copy()
+    result = df[["dt", col]].dropna(subset=[col]).copy()
     result["instrument_id"] = instrument_id
-    result["indicator_name"] = "obv"
-    result["value"] = result[col]
-    result["parameters"] = str(period)
-    return result[["date", "instrument_id", "indicator_name", "value", "parameters"]]
+    return result[["dt", "instrument_id", col]]

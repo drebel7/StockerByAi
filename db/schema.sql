@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS signal_statistics CASCADE;
 DROP TABLE IF EXISTS signal_effectiveness CASCADE;
 DROP TABLE IF EXISTS signals CASCADE;
 DROP TABLE IF EXISTS indicators CASCADE;
+DROP TABLE IF EXISTS indicators_old CASCADE;
 DROP TABLE IF EXISTS daily_quotes CASCADE;
 DROP TABLE IF EXISTS instrument_categories CASCADE;
 DROP TABLE IF EXISTS instruments CASCADE;
@@ -14,7 +15,8 @@ CREATE TABLE exchanges (
     id      SERIAL PRIMARY KEY,
     code    VARCHAR(20)  NOT NULL UNIQUE,
     name    VARCHAR(255) NOT NULL,
-    country VARCHAR(10)  NOT NULL
+    country VARCHAR(10)  NOT NULL,
+    active  BOOLEAN      NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE data_sources (
@@ -36,6 +38,11 @@ CREATE TABLE instruments (
     instrument_type VARCHAR(10)  NOT NULL CHECK (instrument_type IN ('stock', 'index', 'etf')),
     sector          VARCHAR(100),
     industry        VARCHAR(100),
+    active          BOOLEAN      NOT NULL DEFAULT TRUE,
+    valid           BOOLEAN      NOT NULL DEFAULT TRUE,
+    dt_from         DATE,
+    dt_to           DATE,
+    market_cap      REAL,
     UNIQUE (ticker, exchange_id)
 );
 
@@ -47,17 +54,17 @@ CREATE TABLE instrument_categories (
 
 CREATE TABLE daily_quotes (
     instrument_id  INTEGER NOT NULL REFERENCES instruments(id) ON DELETE CASCADE,
-    date           DATE    NOT NULL,
-    open           REAL,
-    high           REAL,
-    low            REAL,
-    close          REAL,
+    dt             DATE    NOT NULL,
+    open_price     REAL,
+    high_price     REAL,
+    low_price      REAL,
+    close_price    REAL,
     volume         BIGINT,
     data_source_id INTEGER NOT NULL REFERENCES data_sources(id),
-    UNIQUE (instrument_id, date)
-) PARTITION BY RANGE (date);
+    UNIQUE (instrument_id, dt)
+) PARTITION BY RANGE (dt);
 
-CREATE TABLE indicators (
+CREATE TABLE indicators_old (
     id              SERIAL PRIMARY KEY,
     instrument_id   INTEGER NOT NULL REFERENCES instruments(id) ON DELETE CASCADE,
     date            DATE    NOT NULL,
@@ -65,6 +72,22 @@ CREATE TABLE indicators (
     value           REAL,
     parameters      VARCHAR(255),
     UNIQUE (instrument_id, date, indicator_name, parameters)
+);
+
+CREATE TABLE indicators (
+    instrument_id  INTEGER NOT NULL REFERENCES instruments(id) ON DELETE CASCADE,
+    dt             DATE    NOT NULL,
+    sma_10         REAL,
+    sma_20         REAL,
+    sma_50         REAL,
+    sma_200        REAL,
+    obv_100        REAL,
+    adr_30         REAL,
+    atr_30         REAL,
+    rs             REAL,
+    avg_volume_50  REAL,
+    avg_turnover_50 REAL,
+    UNIQUE (instrument_id, dt)
 );
 
 CREATE TABLE signals (
@@ -114,14 +137,14 @@ CREATE TABLE signal_statistics (
 CREATE OR REPLACE VIEW v_daily_quotes AS
 SELECT e.code, i.ticker, i.full_name
      , i.industry, i.sector
-     , dq."date", dq."open", dq.low, dq.high, dq.close, dq.volume
-     , round(dq.close * dq.volume) turnover
+     , dq.dt, dq.open_price, dq.high_price, dq.low_price, dq.close_price, dq.volume
+     , round(dq.close_price * dq.volume) turnover
 FROM daily_quotes dq
          JOIN instruments i ON i.id = dq.instrument_id
          JOIN exchanges e ON e.id = i.exchange_id;
 
 create or replace view v_instrument_dates as
-select i.id, e.code exchange, i.full_name, min(dq.date) min_dt, max(dq.date) max_dt, count(dq.instrument_id) quotes_count
+select i.id, e.code exchange, i.full_name, min(dq.dt) min_dt, max(dq.dt) max_dt, count(dq.instrument_id) quotes_count
 from instruments i
          join exchanges e on e.id = i.exchange_id
          left join daily_quotes dq on dq.instrument_id = i.id

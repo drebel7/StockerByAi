@@ -13,30 +13,30 @@ def check_effectiveness(signal_id: int, instrument_id: int, signal_date, close_a
                         periods: list = None) -> dict:
     periods = periods or [10, 20, 50, 100]
     query = sa_text("""
-        SELECT date, close, low, high
+        SELECT dt, close_price, low_price, high_price
         FROM daily_quotes
-        WHERE instrument_id = :iid AND date > :dt
-        ORDER BY date
+        WHERE instrument_id = :iid AND dt > :dt
+        ORDER BY dt
     """)
     df = pd.read_sql(query, engine, params={"iid": instrument_id, "dt": signal_date},
-                     parse_dates=["date"])
+                     parse_dates=["dt"])
     if df.empty:
         return {}
 
     result = {"signal_id": signal_id, "close_at_signal": close_at_signal,
               "drawdown_failed": False}
-    result["low_10d"] = float(df.iloc[:min(10, len(df))]["low"].min())
+    result["low_10d"] = float(df.iloc[:min(10, len(df))]["low_price"].min())
 
     periods_map = {}
     for p in periods:
         if len(df) >= p:
-            end_close = float(df.iloc[p - 1]["close"])
+            end_close = float(df.iloc[p - 1]["close_price"])
             periods_map[f"return_{p}d"] = (end_close - close_at_signal) / close_at_signal
         else:
             periods_map[f"return_{p}d"] = None
 
     result.update(periods_map)
-    result["high_10d"] = float(df.iloc[:min(10, len(df))]["high"].max())
+    result["high_10d"] = float(df.iloc[:min(10, len(df))]["high_price"].max())
     return result
 
 
@@ -44,9 +44,9 @@ def compute_effectiveness(batch_size: int = 100):
     session = get_session()
     try:
         query = """
-            SELECT s.id, s.instrument_id, s.date, s.value, d.close
+            SELECT s.id, s.instrument_id, s.date, s.value, d.close_price
             FROM signals s
-            JOIN daily_quotes d ON d.instrument_id = s.instrument_id AND d.date = s.date
+            JOIN daily_quotes d ON d.instrument_id = s.instrument_id AND d.dt = s.date
             WHERE s.id NOT IN (SELECT signal_id FROM signal_effectiveness)
             ORDER BY s.id
         """

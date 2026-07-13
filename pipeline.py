@@ -130,6 +130,17 @@ def run_effectiveness():
     _log_run("effectiveness", _do)
 
 
+def run_ibd():
+    def _do():
+        from data_collection.ibd_classifier import classify_us_instruments
+        session = get_session()
+        try:
+            return classify_us_instruments(session)
+        finally:
+            session.close()
+    _log_run("ibd", _do)
+
+
 def run_stats():
     def _do():
         from statistics.signal_stats import compute_statistics
@@ -138,7 +149,7 @@ def run_stats():
 
 
 def run_pipeline(steps: list[str] = None):
-    allowed = steps or ["schema", "seed", "instruments", "classify", "quotes", "indicators", "signals", "effectiveness", "stats"]
+    allowed = steps or ["schema", "seed", "instruments", "classify", "quotes", "indicators", "signals", "effectiveness", "stats", "ibd"]
 
     if "schema" in allowed:
         run_schema()
@@ -158,6 +169,8 @@ def run_pipeline(steps: list[str] = None):
         run_effectiveness()
     if "stats" in allowed:
         run_stats()
+    if "ibd" in allowed:
+        run_ibd()
 
     logger.info("Pipeline complete.")
 

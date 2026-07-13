@@ -5,6 +5,7 @@ import pandas as pd
 from sqlalchemy import text
 from sqlalchemy.dialects.postgresql import insert
 
+from indicators.base import load_quotes
 from db.models import Indicator
 from utils.database import engine
 from indicators.sma import compute_all_sma
@@ -16,13 +17,36 @@ from indicators.volume import avg_volume, avg_turnover
 logger = logging.getLogger(__name__)
 
 
+def _merge_indicators(base: pd.DataFrame, parts: list[pd.DataFrame]) -> pd.DataFrame:
+    result = base[["dt", "instrument_id"]].copy()
+    for df in parts:
+        if df.empty:
+            continue
+        merge_cols = [c for c in df.columns if c not in ("dt", "instrument_id")]
+        result = result.merge(df, on=["dt", "instrument_id"], how="left")
+    return result
+
+
+INDICATOR_COLS = [
+    "sma_10", "sma_20", "sma_50", "sma_200",
+    "obv_100", "adr_30", "atr_30", "rs",
+    "avg_volume_50", "avg_turnover_50",
+]
+
+
 def compute_all_indicators(instrument_id: int):
     skip_query = "SELECT 1 FROM indicators WHERE instrument_id = :iid LIMIT 1"
     with engine.connect() as conn:
         if conn.execute(text(skip_query), {"iid": instrument_id}).scalar():
             logger.debug("Skipping instrument %d (already has indicators)", instrument_id)
             return 0
-    dfs = [
+
+    dates = load_quotes(instrument_id)[["dt"]].copy()
+    if dates.empty:
+        return 0
+    dates["instrument_id"] = instrument_id
+
+    parts = [
         compute_all_sma(instrument_id),
         obv(instrument_id, period=100),
         adr(instrument_id, period=30),
@@ -31,23 +55,21 @@ def compute_all_indicators(instrument_id: int):
         avg_volume(instrument_id, period=50),
         avg_turnover(instrument_id, period=50),
     ]
-    dfs = [d for d in dfs if not d.empty]
-    if not dfs:
+
+    combined = _merge_indicators(dates, parts)
+    has_data = combined[INDICATOR_COLS].notna().any(axis=1)
+    combined = combined[has_data]
+    if combined.empty:
         return 0
 
-    combined = pd.concat(dfs, ignore_index=True)
     rows = combined.to_dict(orient="records")
-    chunk_size = 2000
-    total = 0
     with engine.begin() as conn:
-        for i in range(0, len(rows), chunk_size):
-            chunk = rows[i : i + chunk_size]
-            stmt = insert(Indicator.__table__).values(chunk)
-            stmt = stmt.on_conflict_do_nothing(
-                index_elements=["instrument_id", "date", "indicator_name", "parameters"]
-            )
-            conn.execute(stmt)
-            total += len(chunk)
-    logger.info("Stored %d indicator rows for instrument %d", total, instrument_id)
+        stmt = insert(Indicator.__table__).values(rows)
+        stmt = stmt.on_conflict_do_update(
+            index_elements=["instrument_id", "dt"],
+            set_={c: stmt.excluded[c] for c in INDICATOR_COLS},
+        )
+        conn.execute(stmt)
+    logger.info("Stored %d wide indicator rows for instrument %d", len(rows), instrument_id)
     time.sleep(0.2)
-    return total
+    return len(rows)

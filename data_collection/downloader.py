@@ -58,28 +58,28 @@ def download_batch_quotes(
             if sub.empty:
                 continue
             raw_ticker = yf_t.replace(suffix, "")
-            for dt, row in sub.iterrows():
+            for dt_val, row in sub.iterrows():
                 records.append({
-                    "date": dt,
+                    "dt": dt_val,
                     "ticker": raw_ticker,
                     "exchange": exchange,
-                    "open": row.get("Open"),
-                    "high": row.get("High"),
-                    "low": row.get("Low"),
-                    "close": row.get("Close"),
+                    "open_price": row.get("Open"),
+                    "high_price": row.get("High"),
+                    "low_price": row.get("Low"),
+                    "close_price": row.get("Close"),
                     "volume": row.get("Volume"),
                 })
     else:
         ticker = tickers[0]
-        for dt, row in df.iterrows():
+        for dt_val, row in df.iterrows():
             records.append({
-                "date": dt,
+                "dt": dt_val,
                 "ticker": ticker,
                 "exchange": exchange,
-                "open": row.get("Open") or row.get("open"),
-                "high": row.get("High") or row.get("high"),
-                "low": row.get("Low") or row.get("low"),
-                "close": row.get("Close") or row.get("close"),
+                "open_price": row.get("Open") or row.get("open"),
+                "high_price": row.get("High") or row.get("high"),
+                "low_price": row.get("Low") or row.get("low"),
+                "close_price": row.get("Close") or row.get("close"),
                 "volume": row.get("Volume") or row.get("volume"),
             })
 
@@ -112,7 +112,7 @@ def bulk_upsert_quotes(df: pd.DataFrame) -> int:
         from utils.database import ensure_partitions
         ensure_partitions(engine)
 
-        rows = df[["instrument_id", "date", "open", "high", "low", "close", "volume", "data_source_id"]].to_dict(orient="records")
+        rows = df[["instrument_id", "dt", "open_price", "high_price", "low_price", "close_price", "volume", "data_source_id"]].to_dict(orient="records")
 
         with engine.begin() as conn:
             # Insert in chunks of 2000 rows to avoid PostgreSQL parameter limit (~32767)
@@ -121,12 +121,12 @@ def bulk_upsert_quotes(df: pd.DataFrame) -> int:
                 chunk = rows[i:i + chunk_size]
                 stmt = insert(DailyQuote.__table__).values(chunk)
                 stmt = stmt.on_conflict_do_update(
-                    index_elements=["instrument_id", "date"],
+                    index_elements=["instrument_id", "dt"],
                     set_={
-                        "open": stmt.excluded.open,
-                        "high": stmt.excluded.high,
-                        "low": stmt.excluded.low,
-                        "close": stmt.excluded.close,
+                        "open_price": stmt.excluded.open_price,
+                        "high_price": stmt.excluded.high_price,
+                        "low_price": stmt.excluded.low_price,
+                        "close_price": stmt.excluded.close_price,
                         "volume": stmt.excluded.volume,
                         "data_source_id": stmt.excluded.data_source_id,
                     },

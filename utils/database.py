@@ -25,8 +25,8 @@ def ensure_partitions(engine, start_year=2010, end_year=None):
                 FOR VALUES FROM ('{start_date}') TO ('{end_date}')
             """))
             conn.execute(text(f"""
-                CREATE INDEX IF NOT EXISTS idx_{partition_name}_date_instrument
-                ON {partition_name} (date, instrument_id)
+                CREATE INDEX IF NOT EXISTS idx_{partition_name}_dt_instrument
+                ON {partition_name} (dt, instrument_id)
             """))
 
 

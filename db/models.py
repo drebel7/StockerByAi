@@ -10,6 +10,7 @@ class Exchange(Base):
     code = Column(String(20), unique=True, nullable=False)
     name = Column(String(255), nullable=False)
     country = Column(String(10), nullable=False)
+    active = Column(Boolean, nullable=False, default=True)
 
     instruments = relationship("Instrument", back_populates="exchange")
 
@@ -43,6 +44,11 @@ class Instrument(Base):
     instrument_type = Column(String(10), nullable=False)
     sector = Column(String(100))
     industry = Column(String(100))
+    active = Column(Boolean, nullable=False, default=True)
+    valid = Column(Boolean, nullable=False, default=True)
+    dt_from = Column(Date)
+    dt_to = Column(Date)
+    market_cap = Column(Float)
     __table_args__ = (UniqueConstraint("ticker", "exchange_id"),)
 
     exchange = relationship("Exchange", back_populates="instruments")
@@ -52,18 +58,18 @@ class Instrument(Base):
 class DailyQuote(Base):
     __tablename__ = "daily_quotes"
     instrument_id = Column(Integer, ForeignKey("instruments.id"), nullable=False, primary_key=True)
-    date = Column(Date, nullable=False, primary_key=True)
-    open = Column(Float)
-    high = Column(Float)
-    low = Column(Float)
-    close = Column(Float)
+    dt = Column(Date, nullable=False, primary_key=True)
+    open_price = Column(Float)
+    high_price = Column(Float)
+    low_price = Column(Float)
+    close_price = Column(Float)
     volume = Column(Integer)
     data_source_id = Column(Integer, ForeignKey("data_sources.id"), nullable=False)
-    __table_args__ = (UniqueConstraint("instrument_id", "date"),)
+    __table_args__ = (UniqueConstraint("instrument_id", "dt"),)
 
 
-class Indicator(Base):
-    __tablename__ = "indicators"
+class IndicatorOld(Base):
+    __tablename__ = "indicators_old"
     id = Column(Integer, primary_key=True)
     instrument_id = Column(Integer, ForeignKey("instruments.id"), nullable=False)
     date = Column(Date, nullable=False)
@@ -71,6 +77,23 @@ class Indicator(Base):
     value = Column(Float)
     parameters = Column(String(255))
     __table_args__ = (UniqueConstraint("instrument_id", "date", "indicator_name", "parameters"),)
+
+
+class Indicator(Base):
+    __tablename__ = "indicators"
+    instrument_id = Column(Integer, ForeignKey("instruments.id"), nullable=False, primary_key=True)
+    dt = Column(Date, nullable=False, primary_key=True)
+    sma_10 = Column(Float)
+    sma_20 = Column(Float)
+    sma_50 = Column(Float)
+    sma_200 = Column(Float)
+    obv_100 = Column(Float)
+    adr_30 = Column(Float)
+    atr_30 = Column(Float)
+    rs = Column(Float)
+    avg_volume_50 = Column(Float)
+    avg_turnover_50 = Column(Float)
+    __table_args__ = (UniqueConstraint("instrument_id", "dt"),)
 
 
 class Signal(Base):

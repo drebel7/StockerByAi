@@ -34,7 +34,7 @@ def volume_breakout_signal(instrument_id: int, lookback_days: int = 14, min_days
 
     df["avg_vol_50"] = df["volume"].rolling(window=50).mean()
     df["prev_vol"] = df["volume"].shift(1)
-    df["pct_change"] = df["close"].pct_change() * 100
+    df["pct_change"] = df["close_price"].pct_change() * 100
 
     df["condition"] = (
         (df["volume"] > df["avg_vol_50"]) &
@@ -47,13 +47,13 @@ def volume_breakout_signal(instrument_id: int, lookback_days: int = 14, min_days
     df["signal"] = 0
     df.loc[df["rolling_count"] >= min_days, "signal"] = 1
 
-    result = df[df["signal"] != 0][["date", "signal"]].copy()
+    result = df[df["signal"] != 0][["dt", "signal"]].copy()
     if result.empty:
         return pd.DataFrame()
     result["instrument_id"] = instrument_id
     result["signal_type"] = "volume_breakout"
     result.rename(columns={"signal": "value"}, inplace=True)
-    return result[["date", "value", "instrument_id", "signal_type"]]
+    return result[["dt", "value", "instrument_id", "signal_type"]]
 
 
 @register_signal("golden_cross")
@@ -62,20 +62,13 @@ def golden_cross_signal(instrument_id: int) -> pd.DataFrame:
     from utils.database import engine
 
     query = text("""
-        SELECT i1.date,
-               i1.value AS sma_50,
-               i2.value AS sma_200
-        FROM indicators i1
-        JOIN indicators i2
-          ON i1.instrument_id = i2.instrument_id
-         AND i1.date = i2.date
-        WHERE i1.instrument_id = :iid
-          AND i1.indicator_name = 'sma' AND i1.parameters = '50'
-          AND i2.indicator_name = 'sma' AND i2.parameters = '200'
-        ORDER BY i1.date
+        SELECT dt, sma_50, sma_200
+        FROM indicators
+        WHERE instrument_id = :iid
+        ORDER BY dt
     """)
     with engine.connect() as conn:
-        df = pd.read_sql(query, conn, params={"iid": instrument_id}, parse_dates=["date"])
+        df = pd.read_sql(query, conn, params={"iid": instrument_id}, parse_dates=["dt"])
 
     if df.empty or len(df) < 2:
         return pd.DataFrame()
@@ -87,13 +80,13 @@ def golden_cross_signal(instrument_id: int) -> pd.DataFrame:
     df.loc[(df["prev_sma_50"] <= df["prev_sma_200"]) & (df["sma_50"] > df["sma_200"]), "signal"] = 1
     df.loc[(df["prev_sma_50"] >= df["prev_sma_200"]) & (df["sma_50"] < df["sma_200"]), "signal"] = -1
 
-    result = df[df["signal"] != 0][["date", "signal"]].copy()
+    result = df[df["signal"] != 0][["dt", "signal"]].copy()
     if result.empty:
         return pd.DataFrame()
     result["instrument_id"] = instrument_id
     result["signal_type"] = "golden_cross"
     result.rename(columns={"signal": "value"}, inplace=True)
-    return result[["date", "value", "instrument_id", "signal_type"]]
+    return result[["dt", "value", "instrument_id", "signal_type"]]
 
 
 def compute_all_signals(instrument_id: int):

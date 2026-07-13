@@ -5,33 +5,13 @@ from utils.database import engine
 
 def load_quotes(instrument_id: int) -> pd.DataFrame:
     query = text("""
-        SELECT date, open, high, low, close, volume
+        SELECT dt, open_price, high_price, low_price, close_price, volume
         FROM daily_quotes
         WHERE instrument_id = :iid
-        ORDER BY date
+        ORDER BY dt
     """)
     with engine.connect() as conn:
-        return pd.read_sql(query, conn, params={"iid": instrument_id}, parse_dates=["date"])
+        return pd.read_sql(query, conn, params={"iid": instrument_id}, parse_dates=["dt"])
 
 
-def store_indicators(df: pd.DataFrame) -> int:
-    from sqlalchemy.dialects.postgresql import insert
-    from db.models import Indicator
-    import math
 
-    if df.empty:
-        return 0
-    rows = df.to_dict(orient="records")
-    chunk_size = 2000
-    total = 0
-    with engine.begin() as conn:
-        for i in range(0, len(rows), chunk_size):
-            chunk = rows[i : i + chunk_size]
-            stmt = insert(Indicator.__table__).values(chunk)
-            stmt = stmt.on_conflict_do_update(
-                index_elements=["instrument_id", "date", "indicator_name", "parameters"],
-                set_={c: stmt.excluded[c] for c in df.columns if c not in ("id", "instrument_id", "date", "indicator_name", "parameters")},
-            )
-            conn.execute(stmt)
-            total += len(chunk)
-    return total

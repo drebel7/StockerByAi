@@ -36,13 +36,11 @@ def rs(instrument_id: int) -> pd.DataFrame:
     bench = _get_benchmark_quotes(instrument_id)
     if df.empty or bench.empty:
         return pd.DataFrame()
-    merged = df[["date", "close"]].merge(bench[["bench_close"]], left_on="date", right_index=True, how="inner")
-    merged["stock_return"] = merged["close"].pct_change()
+    merged = df[["dt", "close_price"]].merge(bench[["bench_close"]], left_on="dt", right_index=True, how="inner")
+    merged["stock_return"] = merged["close_price"].pct_change()
     merged["bench_return"] = merged["bench_close"].pct_change()
     merged["rs_value"] = (1 + merged["stock_return"]).cumprod() / (1 + merged["bench_return"]).cumprod()
-    result = merged[["date", "rs_value"]].dropna(subset=["rs_value"]).copy()
+    result = merged[["dt", "rs_value"]].dropna(subset=["rs_value"]).copy()
+    result = result.rename(columns={"rs_value": "rs"})
     result["instrument_id"] = instrument_id
-    result["indicator_name"] = "rs"
-    result["value"] = result["rs_value"]
-    result["parameters"] = None
-    return result[["date", "instrument_id", "indicator_name", "value", "parameters"]]
+    return result[["dt", "instrument_id", "rs"]]
