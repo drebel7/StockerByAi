@@ -1,0 +1,122 @@
+{
+  "BOS": {
+    "type": "EQUITY",
+    "name": "Bank Ochrony Srodowiska S.A."
+  },
+  "CEZ": {
+    "type": "EQUITY",
+    "name": "CEZ, a. s."
+  },
+  "CFI": {
+    "type": "EQUITY",
+    "name": "CFI Holding S.A."
+  },
+  "DGA": {
+    "type": "EQUITY",
+    "name": "DGA Sp\u00f3lka Akcyjna"
+  },
+  "ERG": {
+    "type": "EQUITY",
+    "name": "ERG Sp\u00f3lka Akcyjna"
+  },
+  "FMG": {
+    "type": "EQUITY",
+    "name": "Wise Energy S.A."
+  },
+  "FON": {
+    "type": "EQUITY",
+    "name": "FON SE"
+  },
+  "GPW": {
+    "type": "EQUITY",
+    "name": "Gielda Papier\u00f3w Wartosciowych w Warszawie S.A."
+  },
+  "GTC": {
+    "type": "EQUITY",
+    "name": "Globe Trade Centre S.A."
+  },
+  "IMS": {
+    "type": "EQUITY",
+    "name": "IMS S.A."
+  },
+  "INC": {
+    "type": "EQUITY",
+    "name": "INC S.A."
+  },
+  "JRH": {
+    "type": "EQUITY",
+    "name": "JRH"
+  },
+  "JSW": {
+    "type": "EQUITY",
+    "name": "Jastrzebska Sp\u00f3lka Weglowa S.A."
+  },
+  "KCI": {
+    "type": "EQUITY",
+    "name": "KCI Spolka Akcyjna"
+  },
+  "KGL": {
+    "type": "EQUITY",
+    "name": "KGL SA"
+  },
+  "LPP": {
+    "type": "EQUITY",
+    "name": "LPP SA"
+  },
+  "MCI": {
+    "type": "EQUITY",
+    "name": "MCI Capital Alternatywna Sp\u00f3lka Inwestycyjna S.A."
+  },
+  "MCR": {
+    "type": "EQUITY",
+    "name": "mcr Spolka Akcyjna"
+  },
+  "MFO": {
+    "type": "EQUITY",
+    "name": "MFO S.A."
+  },
+  "MOJ": {
+    "type": "EQUITY",
+    "name": "MOJ"
+  },
+  "MOL": {
+    "type": "EQUITY",
+    "name": "MOL Magyar Olaj- \u00e9s G\u00e1zipari Nyilv\u00e1nosan Muk\u00f6do R\u00e9szv\u00e9nyt\u00e1rsas\u00e1g"
+  },
+  "PBG": {
+    "type": "EQUITY",
+    "name": "PBG S.A."
+  },
+  "PEP": {
+    "type": "EQUITY",
+    "name": "Polenergia S.A."
+  },
+  "PGE": {
+    "type": "EQUITY",
+    "name": "PGE Polska Grupa Energetyczna S.A."
+  },
+  "PHN": {
+    "type": "EQUITY",
+    "name": "Polski Holding Nieruchomosci S.A."
+  },
+  "PZU": {
+    "type": "EQUITY",
+    "name": "Powszechny Zaklad Ubezpieczen SA"
+  },
+  "REX": {
+    "type": "EQUITY",
+    "name": "Rex Concepts S.A."
+  },
+  "VRG": {
+    "type": "EQUITY",
+    "name": "VRG S.A."
+  },
+  "XTB": {
+    "type": "EQUITY",
+    "name": "XTB S.A."
+  },
+  "ZUE": {
+    "type": "EQUITY",
+    "name": "ZUE S.A."
+  }
+}

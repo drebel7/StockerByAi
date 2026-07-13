@@ -36,7 +36,7 @@ def seed_ibd_categories(session):
     existing = {c.name for c in session.query(Category).all()}
     for name in groups:
         if name not in existing:
-            session.add(Category(name=name))
+            session.add(Category(name=name, source="IBD"))
     session.commit()
     logger.info("Seeded %d IBD categories", len(groups) - len(existing))
 

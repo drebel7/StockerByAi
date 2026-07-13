@@ -57,17 +57,20 @@ def compute_all_indicators(instrument_id: int):
     ]
 
     combined = _merge_indicators(dates, parts)
-    has_data = combined[INDICATOR_COLS].notna().any(axis=1)
+    existing_cols = [c for c in INDICATOR_COLS if c in combined.columns]
+    if not existing_cols:
+        return 0
+    has_data = combined[existing_cols].notna().any(axis=1)
     combined = combined[has_data]
     if combined.empty:
         return 0
 
-    rows = combined.to_dict(orient="records")
+    rows = combined[["dt", "instrument_id"] + existing_cols].to_dict(orient="records")
     with engine.begin() as conn:
         stmt = insert(Indicator.__table__).values(rows)
         stmt = stmt.on_conflict_do_update(
             index_elements=["instrument_id", "dt"],
-            set_={c: stmt.excluded[c] for c in INDICATOR_COLS},
+            set_={c: stmt.excluded[c] for c in existing_cols},
         )
         conn.execute(stmt)
     logger.info("Stored %d wide indicator rows for instrument %d", len(rows), instrument_id)

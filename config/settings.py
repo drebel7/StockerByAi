@@ -22,16 +22,13 @@ EXCHANGES = {
 }
 
 INDICES = {
-    "WIG20": "^WIG20",
-    "WIG_BANKI": "^WIG_BANKI",
-    "WIG_GRY": "^WIG_GRY",
-    "WIG_UKRAINA": "^WIG_UKRAINA",
+    "WIG20": "WIG20.WA",
     "SPX": "^GSPC",
     "DJI": "^DJI",
     "IXIC": "^IXIC",
 }
 
-BNCHMARK_INDEX = {"PL": "^WIG20", "US": "^GSPC"}
+BNCHMARK_INDEX = {"PL": "WIG20.WA", "US": "^GSPC"}
 
 GPW_TICKERS_FILE = "config/gpw_tickers.json"
 

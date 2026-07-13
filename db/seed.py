@@ -35,7 +35,7 @@ def seed_categories(session):
     for name in CATEGORY_NAMES:
         existing = session.query(Category).filter_by(name=name).first()
         if not existing:
-            session.add(Category(name=name))
+            session.add(Category(name=name, source="manual"))
     session.commit()
     print(f"Seeded {len(CATEGORY_NAMES)} categories.")
 

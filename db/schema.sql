@@ -27,7 +27,8 @@ CREATE TABLE data_sources (
 
 CREATE TABLE categories (
     id   SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE
+    name   VARCHAR(100) NOT NULL UNIQUE,
+    source VARCHAR(20)
 );
 
 CREATE TABLE instruments (
