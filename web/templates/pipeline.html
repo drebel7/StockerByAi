@@ -1,40 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pipeline — StockerByAI</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="/">StockerByAI</a>
-            <div class="navbar-nav">
-                <a class="nav-link" href="/instruments">Instruments</a>
-                <a class="nav-link active" href="/pipeline">Pipeline</a>
+{% extends "base.html" %}
+{% block title %}Pipeline — StockerByAI{% endblock %}
+{% block content %}
+<h2 class="mb-3">Pipeline Status</h2>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card stat-card h-100">
+            <div class="card-body" id="pipeline-live">
+                <h6 class="card-title text-muted">Current Status</h6>
+                <div class="text-center py-3">
+                    <div class="spinner-border text-primary" role="status"></div>
+                </div>
             </div>
         </div>
-    </nav>
-    <div class="container">
-        <h2>Pipeline Runs</h2>
-        <table class="table table-striped table-hover">
-            <thead class="table-dark">
-                <tr>
-                    <th>Step</th>
-                    <th>Status</th>
-                    <th>Started</th>
-                    <th>Finished</th>
-                    <th>Duration</th>
-                    <th>Rows</th>
-                </tr>
+    </div>
+    <div class="col-md-8">
+        <div class="card stat-card h-100">
+            <div class="card-body">
+                <h6 class="card-title text-muted">Pipeline Steps</h6>
+                <div class="row text-center g-2">
+                    {% set steps = ['schema','seed','instruments','classify','quotes','indicators','signals','effectiveness','stats','ibd'] %}
+                    {% for s in steps %}
+                    <div class="col-6 col-md-3 col-lg">
+                        <div class="border rounded p-2 step-box" data-step="{{ s }}">
+                            <div class="small">{{ s }}</div>
+                            <i class="bi bi-question-circle text-muted" style="font-size:1.2rem"></i>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card stat-card">
+    <div class="card-header bg-white fw-semibold">Run History</div>
+    <div class="card-body p-0">
+        <table class="table table-hover table-sm mb-0">
+            <thead>
+                <tr><th>Step</th><th>Status</th><th>Started</th><th>Finished</th><th>Duration</th><th>Rows</th></tr>
             </thead>
             <tbody>
                 {% for run in runs %}
                 <tr>
                     <td>{{ run.step }}</td>
                     <td>
-                        <span class="badge bg-{{ 'success' if run.status == 'success' else 'danger' if run.status == 'failed' else 'warning' }}">
+                        <span class="badge bg-{{ 'success' if run.status == 'success' else 'danger' if run.status == 'failed' else 'warning pipeline-running' }}">
                             {{ run.status }}
                         </span>
                     </td>
@@ -42,18 +54,59 @@
                     <td>{{ run.finished_at.strftime('%Y-%m-%d %H:%M:%S') if run.finished_at else '' }}</td>
                     <td>
                         {% if run.started_at and run.finished_at %}
-                            {{ (run.finished_at - run.started_at).total_seconds() | int }}s
+                            {{ ((run.finished_at - run.started_at).total_seconds() | int) }}s
+                        {% elif run.started_at %}
+                            <span class="pipeline-running">running…</span>
                         {% endif %}
                     </td>
-                    <td>{{ run.rows_affected or '' }}</td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="6" class="text-center text-muted">No pipeline runs yet.</td>
+                    <td>{{ '{:,.0f}'.format(run.rows_affected) if run.rows_affected else '' }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-</body>
-</html>
+</div>
+
+<script>
+function updatePipeline() {
+    fetch('/api/pipeline/current').then(r=>r.json()).then(d=>{
+        const el = document.getElementById('pipeline-live');
+        if (!d.step) {
+            el.innerHTML = '<h6 class="card-title text-muted">Current Status</h6><div class="text-center text-muted py-4">No runs yet.</div>';
+            return;
+        }
+        const badge = d.status === 'success' ? 'bg-success' : d.status === 'failed' ? 'bg-danger' : 'bg-warning pipeline-running';
+        el.innerHTML = `
+            <h6 class="card-title text-muted">Current Status</h6>
+            <table class="table table-sm mb-0">
+                <tr><th>Step</th><td>${d.step}</td></tr>
+                <tr><th>Status</th><td><span class="badge ${badge}">${d.status}</span></td></tr>
+                <tr><th>Started</th><td>${d.started_at ? new Date(d.started_at).toLocaleString() : '-'}</td></tr>
+                <tr><th>Finished</th><td>${d.finished_at ? new Date(d.finished_at).toLocaleString() : '<span class="pipeline-running">in progress</span>'}</td></tr>
+                <tr><th>Rows</th><td>${d.rows_affected != null ? Number(d.rows_affected).toLocaleString() : '-'}</td></tr>
+            </table>
+        `;
+
+        document.querySelectorAll('.step-box').forEach(box => {
+            box.classList.remove('border-success', 'border-danger', 'border-warning');
+            const step = box.dataset.step;
+            const icon = box.querySelector('i');
+            if (step === d.step && d.status === 'running') {
+                box.classList.add('border-warning');
+                icon.className = 'bi bi-arrow-repeat text-warning pipeline-running';
+            } else if (step === d.step && d.status === 'success') {
+                box.classList.add('border-success');
+                icon.className = 'bi bi-check-circle text-success';
+            } else if (step === d.step && d.status === 'failed') {
+                box.classList.add('border-danger');
+                icon.className = 'bi bi-x-circle text-danger';
+            } else {
+                icon.className = 'bi bi-question-circle text-muted';
+            }
+        });
+    });
+}
+updatePipeline();
+setInterval(updatePipeline, 5000);
+</script>
+{% endblock %}

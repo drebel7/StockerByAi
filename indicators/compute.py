@@ -13,6 +13,7 @@ from indicators.obv import obv
 from indicators.adr_atr import adr, atr
 from indicators.rs import rs
 from indicators.volume import avg_volume, avg_turnover
+from indicators.ichimoku import ichimoku
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +31,9 @@ def _merge_indicators(base: pd.DataFrame, parts: list[pd.DataFrame]) -> pd.DataF
 INDICATOR_COLS = [
     "sma_10", "sma_20", "sma_50", "sma_200",
     "obv_100", "adr_30", "atr_30", "rs",
-    "avg_volume_50", "avg_turnover_50",
+    "avg_volume_30", "avg_volume_50", "avg_turnover_50",
+    "ichimoku_tenkan_sen_9", "ichimoku_kijun_sen_26",
+    "ichimoku_senkou_span_a_26", "ichimoku_senkou_span_b_26",
 ]
 
 
@@ -52,8 +55,10 @@ def compute_all_indicators(instrument_id: int):
         adr(instrument_id, period=30),
         atr(instrument_id, period=30),
         rs(instrument_id),
+        avg_volume(instrument_id, period=30),
         avg_volume(instrument_id, period=50),
         avg_turnover(instrument_id, period=50),
+        ichimoku(instrument_id),
     ]
 
     combined = _merge_indicators(dates, parts)

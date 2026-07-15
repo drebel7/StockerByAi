@@ -92,8 +92,13 @@ class Indicator(Base):
     adr_30 = Column(Float)
     atr_30 = Column(Float)
     rs = Column(Float)
+    avg_volume_30 = Column(Float)
     avg_volume_50 = Column(Float)
     avg_turnover_50 = Column(Float)
+    ichimoku_tenkan_sen_9 = Column(Float)
+    ichimoku_kijun_sen_26 = Column(Float)
+    ichimoku_senkou_span_a_26 = Column(Float)
+    ichimoku_senkou_span_b_26 = Column(Float)
     __table_args__ = (UniqueConstraint("instrument_id", "dt"),)
 
 

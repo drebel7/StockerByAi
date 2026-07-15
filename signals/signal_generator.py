@@ -73,6 +73,7 @@ def golden_cross_signal(instrument_id: int) -> pd.DataFrame:
     if df.empty or len(df) < 2:
         return pd.DataFrame()
 
+    df = df.dropna(subset=["sma_50", "sma_200"])
     df["prev_sma_50"] = df["sma_50"].shift(1)
     df["prev_sma_200"] = df["sma_200"].shift(1)
 
@@ -102,6 +103,7 @@ def compute_all_signals(instrument_id: int):
     if not results:
         return 0
     combined = pd.concat(results, ignore_index=True)
+    combined.rename(columns={"dt": "date"}, inplace=True)
     rows = combined.to_dict(orient="records")
     with engine.begin() as conn:
         stmt = insert(Signal.__table__).values(rows)

@@ -86,8 +86,13 @@ CREATE TABLE indicators (
     adr_30         REAL,
     atr_30         REAL,
     rs             REAL,
+    avg_volume_30  REAL,
     avg_volume_50  REAL,
     avg_turnover_50 REAL,
+    ichimoku_tenkan_sen_9    REAL,
+    ichimoku_kijun_sen_26    REAL,
+    ichimoku_senkou_span_a_26 REAL,
+    ichimoku_senkou_span_b_26 REAL,
     UNIQUE (instrument_id, dt)
 );
 

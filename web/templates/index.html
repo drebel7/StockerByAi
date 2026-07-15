@@ -1,43 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>StockerByAI</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="/">StockerByAI</a>
-            <div class="navbar-nav">
-                <a class="nav-link" href="/instruments">Instruments</a>
-                <a class="nav-link" href="/indicators">Indicators</a>
-                <a class="nav-link" href="/pipeline">Pipeline</a>
+{% extends "base.html" %}
+{% block title %}Dashboard — StockerByAI{% endblock %}
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card stat-card bg-white">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="text-muted small">Instruments</div>
+                    <div class="fs-3 fw-bold">{{ instruments }}</div>
+                    <div class="text-muted small">{{ categorized }} categorized</div>
+                </div>
+                <i class="bi bi-building icon text-primary"></i>
             </div>
         </div>
-    </nav>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Instruments</h5>
-                        <p class="card-text">Browse and filter stocks, ETFs and indices.</p>
-                        <a href="/instruments" class="btn btn-primary">Open</a>
-                    </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card bg-white">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="text-muted small">Indicators</div>
+                    <div class="fs-3 fw-bold">{{ "{:,.0f}".format(indicators) }}</div>
                 </div>
+                <i class="bi bi-graph-up icon text-success"></i>
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Pipeline</h5>
-                        <p class="card-text">View pipeline run history and status.</p>
-                        <a href="/pipeline" class="btn btn-info">Open</a>
-                    </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card bg-white">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="text-muted small">Signals</div>
+                    <div class="fs-3 fw-bold">{{ "{:,.0f}".format(signals) }}</div>
+                </div>
+                <i class="bi bi-signpost-2 icon text-warning"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card bg-white">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="text-muted small">Categories</div>
+                    <div class="fs-3 fw-bold">{{ categories }}</div>
+                </div>
+                <i class="bi bi-tags icon text-danger"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card stat-card">
+            <div class="card-header bg-white fw-semibold d-flex justify-content-between align-items-center">
+                <span>Pipeline Runs</span>
+                <a href="/pipeline" class="btn btn-sm btn-outline-secondary">View all</a>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr><th>Step</th><th>Status</th><th>Started</th><th>Duration</th><th>Rows</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for run in runs %}
+                        <tr>
+                            <td>{{ run.step }}</td>
+                            <td>
+                                <span class="badge bg-{{ 'success' if run.status == 'success' else 'danger' if run.status == 'failed' else 'warning pipeline-running' }}">
+                                    {{ run.status }}
+                                </span>
+                            </td>
+                            <td>{{ run.started_at.strftime('%Y-%m-%d %H:%M') if run.started_at else '' }}</td>
+                            <td>
+                                {% if run.started_at and run.finished_at %}
+                                    {{ ((run.finished_at - run.started_at).total_seconds() | int) }}s
+                                {% elif run.started_at %}
+                                    running…
+                                {% endif %}
+                            </td>
+                            <td>{{ "{:,.0f}".format(run.rows_affected) if run.rows_affected else '' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card stat-card">
+            <div class="card-header bg-white fw-semibold">Latest Run</div>
+            <div class="card-body" id="pipeline-current">
+                <div class="text-center py-3">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <div class="mt-2 text-muted">Loading…</div>
                 </div>
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}
+<script>
+fetch('/api/pipeline/current').then(r=>r.json()).then(d=>{
+    const el = document.getElementById('pipeline-current');
+    if (!d.step) { el.innerHTML = '<div class="text-center text-muted py-3">No runs yet.</div>'; return; }
+    const badge = d.status === 'success' ? 'bg-success' : d.status === 'failed' ? 'bg-danger' : 'bg-warning pipeline-running';
+    el.innerHTML = `
+        <table class="table table-sm mb-0">
+            <tr><th>Step</th><td>${d.step}</td></tr>
+            <tr><th>Status</th><td><span class="badge ${badge}">${d.status}</span></td></tr>
+            <tr><th>Started</th><td>${d.started_at ? new Date(d.started_at).toLocaleString() : '-'}</td></tr>
+            <tr><th>Rows</th><td>${d.rows_affected != null ? Number(d.rows_affected).toLocaleString() : '-'}</td></tr>
+        </table>
+    `;
+});
+</script>
+
