@@ -447,324 +447,4224 @@
     [
       "ZUK",
       "ZUK"
+    ],
+    [
+      "06N",
+      "06MAGNA"
+    ],
+    [
+      "08N",
+      "08OCTAVA"
+    ],
+    [
+      "11B",
+      "11BIT"
+    ],
+    [
+      "1AT",
+      "ATAL"
+    ],
+    [
+      "1ATA",
+      "ATAL-PDA"
+    ],
+    [
+      "3RG",
+      "3RGAMES"
+    ],
+    [
+      "4MS",
+      "4MASS"
+    ],
+    [
+      "AAT",
+      "ALTA"
+    ],
+    [
+      "ABE",
+      "ABPL"
+    ],
+    [
+      "ABS",
+      "ASSECOBS"
+    ],
+    [
+      "ACG",
+      "ACAUTOGAZ"
+    ],
+    [
+      "ACT",
+      "ACTION"
+    ],
+    [
+      "ADV",
+      "ADIUVO"
+    ],
+    [
+      "ADX",
+      "ADATEX"
+    ],
+    [
+      "AGO",
+      "AGORA"
+    ],
+    [
+      "AGT",
+      "AGROTON"
+    ],
+    [
+      "ALG",
+      "AIGAMES"
+    ],
+    [
+      "ALI",
+      "ALTUS"
+    ],
+    [
+      "ALL",
+      "AILLERON"
+    ],
+    [
+      "ALR",
+      "ALIOR"
+    ],
+    [
+      "AMB",
+      "AMBRA"
+    ],
+    [
+      "ANR",
+      "ANSWEAR"
+    ],
+    [
+      "ANRA",
+      "ANSWEAR-PDA"
+    ],
+    [
+      "APE",
+      "APSENERGY"
+    ],
+    [
+      "APL",
+      "AMPLI"
+    ],
+    [
+      "APN",
+      "APLISENS"
+    ],
+    [
+      "APT",
+      "APATOR"
+    ],
+    [
+      "ARH",
+      "ARCHICOM"
+    ],
+    [
+      "ARHA",
+      "ARCHICOM-PDA"
+    ],
+    [
+      "ARL",
+      "ARLEN"
+    ],
+    [
+      "ART",
+      "ARTIFEX"
+    ],
+    [
+      "ASM",
+      "ASMGROUP"
+    ],
+    [
+      "AST",
+      "ASTARTA"
+    ],
+    [
+      "ATC",
+      "ARCTIC"
+    ],
+    [
+      "ATD",
+      "ATENDE"
+    ],
+    [
+      "ATG",
+      "ATMGRUPA"
+    ],
+    [
+      "ATP",
+      "ATLANTAPL"
+    ],
+    [
+      "ATR",
+      "ATREM"
+    ],
+    [
+      "ATS",
+      "ATLANTIS"
+    ],
+    [
+      "AUG",
+      "AUGA"
+    ],
+    [
+      "AWM",
+      "AIRWAY"
+    ],
+    [
+      "BAH",
+      "BAHOLDING"
+    ],
+    [
+      "BBD",
+      "BBIDEV"
+    ],
+    [
+      "BBT",
+      "BOOMBIT"
+    ],
+    [
+      "BCM",
+      "BETACOM"
+    ],
+    [
+      "BCS",
+      "BIGCHEESE"
+    ],
+    [
+      "BCSA",
+      "BIGCHEESE-PDA"
+    ],
+    [
+      "BCX",
+      "BIOCELTIX"
+    ],
+    [
+      "BDX",
+      "BUDIMEX"
+    ],
+    [
+      "BFTA",
+      "BENEFIT-PDA"
+    ],
+    [
+      "BHW",
+      "HANDLOWY"
+    ],
+    [
+      "BIP",
+      "BIOPLANET"
+    ],
+    [
+      "BIPA",
+      "BIOPLANET-PDA"
+    ],
+    [
+      "BLO",
+      "BLOOBER"
+    ],
+    [
+      "BMC",
+      "BUMECH"
+    ],
+    [
+      "BMX",
+      "BIOMAXIMA"
+    ],
+    [
+      "BNP",
+      "BNPPPL"
+    ],
+    [
+      "BOW",
+      "BOWIM"
+    ],
+    [
+      "BRA",
+      "BRASTER"
+    ],
+    [
+      "BST",
+      "BEST"
+    ],
+    [
+      "CAP",
+      "CAPITEA"
+    ],
+    [
+      "CAR",
+      "INTERCARS"
+    ],
+    [
+      "CAV",
+      "CAVATINA"
+    ],
+    [
+      "CAVA",
+      "CAVATINA-PDA"
+    ],
+    [
+      "CBF",
+      "CYBERFLKS"
+    ],
+    [
+      "CBFA",
+      "CYBERFLKS-PDA"
+    ],
+    [
+      "CCE",
+      "CCENERGY"
+    ],
+    [
+      "CDL",
+      "CDRL"
+    ],
+    [
+      "CLC",
+      "COLUMBUS"
+    ],
+    [
+      "CLD",
+      "CLOUD"
+    ],
+    [
+      "CLE",
+      "COALENERG"
+    ],
+    [
+      "CLN",
+      "CLNPHARMA"
+    ],
+    [
+      "CLNA",
+      "CLNPHARMA-PDA"
+    ],
+    [
+      "CMP",
+      "COMP"
+    ],
+    [
+      "CNT",
+      "CNT"
+    ],
+    [
+      "CPA",
+      "CAPITAL"
+    ],
+    [
+      "CPI",
+      "CPIEUROPE"
+    ],
+    [
+      "CPL",
+      "COMPERIA"
+    ],
+    [
+      "CPR",
+      "COMPREMUM"
+    ],
+    [
+      "CPS",
+      "CYFRPLSAT"
+    ],
+    [
+      "CRI",
+      "CREOTECH"
+    ],
+    [
+      "CRIA",
+      "CREOTECH-PDA"
+    ],
+    [
+      "CRJ",
+      "CREEPYJAR"
+    ],
+    [
+      "CRM",
+      "CORMAY"
+    ],
+    [
+      "CRQ",
+      "CRQUANTUM"
+    ],
+    [
+      "CRQA",
+      "CRQUANTUM-PDA"
+    ],
+    [
+      "CSR",
+      "CASPAR"
+    ],
+    [
+      "CTS",
+      "CITYSERV"
+    ],
+    [
+      "CTX",
+      "CAPTORTX"
+    ],
+    [
+      "CTXA",
+      "CAPTORTX-PDA"
+    ],
+    [
+      "CZT",
+      "CZTOREBKA"
+    ],
+    [
+      "DAD",
+      "DADELO"
+    ],
+    [
+      "DADA",
+      "DADELO-PDA"
+    ],
+    [
+      "DAT",
+      "DATAWALK"
+    ],
+    [
+      "DBC",
+      "DEBICA"
+    ],
+    [
+      "DBE",
+      "DBENERGY"
+    ],
+    [
+      "DBEA",
+      "DBENERGY-PDA"
+    ],
+    [
+      "DCR",
+      "DECORA"
+    ],
+    [
+      "DEK",
+      "DEKPOL"
+    ],
+    [
+      "DEL",
+      "DELKO"
+    ],
+    [
+      "DGE",
+      "DRAGOENT"
+    ],
+    [
+      "DIA",
+      "DIAG"
+    ],
+    [
+      "DIG",
+      "DIGITANET"
+    ],
+    [
+      "DMG",
+      "DMGROUP"
+    ],
+    [
+      "DPL",
+      "DROZAPOL"
+    ],
+    [
+      "DRE",
+      "DREWEX"
+    ],
+    [
+      "DRP",
+      "DROP"
+    ],
+    [
+      "DTR",
+      "DIGITREE"
+    ],
+    [
+      "EAH",
+      "ESOTIQ"
+    ],
+    [
+      "EAT",
+      "AMREST"
+    ],
+    [
+      "EBP",
+      "ERSTEPL"
+    ],
+    [
+      "ECB",
+      "ECBSA"
+    ],
+    [
+      "EDI",
+      "EDINVEST"
+    ],
+    [
+      "EEX",
+      "EKOEXPORT"
+    ],
+    [
+      "EFK",
+      "EFEKT"
+    ],
+    [
+      "EHG",
+      "EUROHOLD"
+    ],
+    [
+      "EKP",
+      "ELKOP"
+    ],
+    [
+      "ELB",
+      "ELBUDOWA"
+    ],
+    [
+      "ELT",
+      "ELEKTROTI"
+    ],
+    [
+      "ENAA",
+      "ENEA-PDA"
+    ],
+    [
+      "ENE",
+      "ENELMED"
+    ],
+    [
+      "ENEA",
+      "ENELMED-PDA"
+    ],
+    [
+      "ENI",
+      "ENERGOINS"
+    ],
+    [
+      "ENT",
+      "ENTER"
+    ],
+    [
+      "EQU",
+      "EQUNICO"
+    ],
+    [
+      "ERB",
+      "ERBUD"
+    ],
+    [
+      "EST",
+      "ESTAR"
+    ],
+    [
+      "ETL",
+      "EUROTEL"
+    ],
+    [
+      "EUC",
+      "EUCO"
+    ],
+    [
+      "FAB",
+      "FABRITY"
+    ],
+    [
+      "FEE",
+      "FEERUM"
+    ],
+    [
+      "FFI",
+      "FASTFIN"
+    ],
+    [
+      "FGT",
+      "FENGHUA"
+    ],
+    [
+      "FHB",
+      "FOODHUB"
+    ],
+    [
+      "FSG",
+      "FASING"
+    ],
+    [
+      "GIF",
+      "GAMFACTOR"
+    ],
+    [
+      "GIFA",
+      "GAMFACTOR-PDA"
+    ],
+    [
+      "GKI",
+      "IMMOBILE"
+    ],
+    [
+      "GMT",
+      "GENOMTEC"
+    ],
+    [
+      "GNB",
+      "GETINOBLE"
+    ],
+    [
+      "GNS",
+      "NIEWIADOW"
+    ],
+    [
+      "GOB",
+      "GOBARTO"
+    ],
+    [
+      "GOP",
+      "GAMEOPS"
+    ],
+    [
+      "GRN",
+      "GRODNO"
+    ],
+    [
+      "GTCA",
+      "GTC-PDA"
+    ],
+    [
+      "GVT",
+      "VIRTUS"
+    ],
+    [
+      "HDR",
+      "HYDROTOR"
+    ],
+    [
+      "HEL",
+      "HELIO"
+    ],
+    [
+      "HMI",
+      "HMINWEST"
+    ],
+    [
+      "HRP",
+      "HARPER"
+    ],
+    [
+      "HUG",
+      "HUUUGE"
+    ],
+    [
+      "ICE",
+      "MEDINICE"
+    ],
+    [
+      "IDA",
+      "IDEABANK"
+    ],
+    [
+      "IDG",
+      "INDYGO"
+    ],
+    [
+      "IDM",
+      "IDMSA"
+    ],
+    [
+      "IFC",
+      "IFCAPITAL"
+    ],
+    [
+      "IFI",
+      "IFIRMA"
+    ],
+    [
+      "IFR",
+      "IFSA"
+    ],
+    [
+      "IMC",
+      "IMCOMPANY"
+    ],
+    [
+      "INK",
+      "INSTALKRK"
+    ],
+    [
+      "INL",
+      "INTROL"
+    ],
+    [
+      "INP",
+      "INPRO"
+    ],
+    [
+      "IPE",
+      "IPOPEMA"
+    ],
+    [
+      "IPF",
+      "PROVIDENT"
+    ],
+    [
+      "IPO",
+      "INTERSPPL"
+    ],
+    [
+      "IRL",
+      "INTERAOLT"
+    ],
+    [
+      "ITB",
+      "INTERBUD"
+    ],
+    [
+      "ITM",
+      "ITMTRADE"
+    ],
+    [
+      "IZB",
+      "IZOBLOK"
+    ],
+    [
+      "IZO",
+      "IZOLACJA"
+    ],
+    [
+      "IZS",
+      "IZOSTAL"
+    ],
+    [
+      "JJO",
+      "JJAUTO"
+    ],
+    [
+      "JWW",
+      "JWWINVEST"
+    ],
+    [
+      "KAN",
+      "KANIA"
+    ],
+    [
+      "KBD",
+      "KBDOM"
+    ],
+    [
+      "KCH",
+      "KRAKCHEM"
+    ],
+    [
+      "KDM",
+      "KDMSHIPNG"
+    ],
+    [
+      "KER",
+      "KERNEL"
+    ],
+    [
+      "KMP",
+      "KOMPAP"
+    ],
+    [
+      "KOM",
+      "KOMPUTRON"
+    ],
+    [
+      "KPD",
+      "KPPD"
+    ],
+    [
+      "KPL",
+      "KINOPOL"
+    ],
+    [
+      "KRK",
+      "KRKA"
+    ],
+    [
+      "KRU",
+      "KRUK"
+    ],
+    [
+      "KSG",
+      "KSGAGRO"
+    ],
+    [
+      "KVT",
+      "KRVITAMIN"
+    ],
+    [
+      "KZS",
+      "KREZUS"
+    ],
+    [
+      "LBT",
+      "LIBET"
+    ],
+    [
+      "LBW",
+      "LUBAWA"
+    ],
+    [
+      "LES",
+      "LESS"
+    ],
+    [
+      "LKD",
+      "LOKUM"
+    ],
+    [
+      "LMU",
+      "LMCU"
+    ],
+    [
+      "LRK",
+      "LARK"
+    ],
+    [
+      "LRQ",
+      "LARQ"
+    ],
+    [
+      "LSI",
+      "LSISOFT"
+    ],
+    [
+      "LTX",
+      "LENTEX"
+    ],
+    [
+      "MABA",
+      "MABION-PDA"
+    ],
+    [
+      "MAK",
+      "MAKARONPL"
+    ],
+    [
+      "MAN",
+      "MANYDEV"
+    ],
+    [
+      "MBR",
+      "MOBRUK"
+    ],
+    [
+      "MBW",
+      "MBWS"
+    ],
+    [
+      "MDG",
+      "MEDICALG"
+    ],
+    [
+      "MDI",
+      "MDIENERGIA"
+    ],
+    [
+      "MDV",
+      "MODIVO"
+    ],
+    [
+      "MEG",
+      "MEGARON"
+    ],
+    [
+      "MEX",
+      "MEXPOLSKA"
+    ],
+    [
+      "MGT",
+      "MANGATA"
+    ],
+    [
+      "MLG",
+      "MLPGROUP"
+    ],
+    [
+      "MLGA",
+      "MLPGROUP-PDA"
+    ],
+    [
+      "MLK",
+      "MILKILAND"
+    ],
+    [
+      "MLS",
+      "MLSYSTEM"
+    ],
+    [
+      "MLSA",
+      "MLSYSTEM-PDA"
+    ],
+    [
+      "MNC",
+      "MENNICA"
+    ],
+    [
+      "MOC",
+      "MOLECURE"
+    ],
+    [
+      "MON",
+      "MONNARI"
+    ],
+    [
+      "MOV",
+      "MOVIEGAMES"
+    ],
+    [
+      "MRC",
+      "MERCATOR"
+    ],
+    [
+      "MSP",
+      "MOSTALPLC"
+    ],
+    [
+      "MSW",
+      "MOSTALWAR"
+    ],
+    [
+      "MSZ",
+      "MOSTALZAB"
+    ],
+    [
+      "MTL",
+      "MEDIATEL"
+    ],
+    [
+      "MUR",
+      "MURAPOL"
+    ],
+    [
+      "MVP",
+      "MARVIPOL"
+    ],
+    [
+      "MWT",
+      "MWTRADE"
+    ],
+    [
+      "MXC",
+      "MAXCOM"
+    ],
+    [
+      "MZA",
+      "MUZA"
+    ],
+    [
+      "NCL",
+      "NOCTILUCA"
+    ],
+    [
+      "NNG",
+      "NANOGROUP"
+    ],
+    [
+      "NNGA",
+      "NANOGROUP-PDA"
+    ],
+    [
+      "NTC",
+      "NTCAPITAL"
+    ],
+    [
+      "NTT",
+      "NTTSYSTEM"
+    ],
+    [
+      "NTU",
+      "NOVATURAS"
+    ],
+    [
+      "NVA",
+      "PANOVA"
+    ],
+    [
+      "NVG",
+      "NOVAVISGR"
+    ],
+    [
+      "NVT",
+      "NOVITA"
+    ],
+    [
+      "NWG",
+      "NEWAG"
+    ],
+    [
+      "NXG",
+      "NEXITY"
+    ],
+    [
+      "OBL",
+      "ORZBIALY"
+    ],
+    [
+      "ODL",
+      "ODLEWNIE"
+    ],
+    [
+      "OML",
+      "ONEMORE"
+    ],
+    [
+      "OND",
+      "ONDE"
+    ],
+    [
+      "ONDA",
+      "ONDE-PDA"
+    ],
+    [
+      "ONO",
+      "ONESANO"
+    ],
+    [
+      "OPF",
+      "OPENFIN"
+    ],
+    [
+      "OPG",
+      "ORCOGROUP"
+    ],
+    [
+      "OPM",
+      "OPTEAM"
+    ],
+    [
+      "OTM",
+      "OTMUCHOW"
+    ],
+    [
+      "PAS",
+      "PASSUS"
+    ],
+    [
+      "PAT",
+      "PATENTUS"
+    ],
+    [
+      "PBF",
+      "PBSFINANSE"
+    ],
+    [
+      "PBX",
+      "PEKABEX"
+    ],
+    [
+      "PCF",
+      "PCFGROUP"
+    ],
+    [
+      "PCFA",
+      "PCFGROUP-PDA"
+    ],
+    [
+      "PCG",
+      "PCGUARD"
+    ],
+    [
+      "PCR",
+      "PCCROKITA"
+    ],
+    [
+      "PCX",
+      "PCCEXOL"
+    ],
+    [
+      "PDZ",
+      "PRAIRIE"
+    ],
+    [
+      "PEN",
+      "PHOTON"
+    ],
+    [
+      "PEPA",
+      "PEP-PDA"
+    ],
+    [
+      "PEX",
+      "PEIXIN"
+    ],
+    [
+      "PGEA",
+      "PGE-PDA"
+    ],
+    [
+      "PGM",
+      "PMPG"
+    ],
+    [
+      "PHR",
+      "PHARMENA"
+    ],
+    [
+      "PJP",
+      "PJPMAKRUM"
+    ],
+    [
+      "PKP",
+      "PKPCARGO"
+    ],
+    [
+      "PLW",
+      "PLAYWAY"
+    ],
+    [
+      "PLZ",
+      "PLAZACNTR"
+    ],
+    [
+      "PMA",
+      "PRIMAMODA"
+    ],
+    [
+      "PRI",
+      "PRAGMAINK"
+    ],
+    [
+      "PRM",
+      "PROCHEM"
+    ],
+    [
+      "PRT",
+      "PROTEKTOR"
+    ],
+    [
+      "PTG",
+      "POLTREG"
+    ],
+    [
+      "PTGA",
+      "POLTREG-PDA"
+    ],
+    [
+      "PTH",
+      "PRIMETECH"
+    ],
+    [
+      "PTW",
+      "PTWP"
+    ],
+    [
+      "PUR",
+      "PURE"
+    ],
+    [
+      "PURA",
+      "PURE-PDA"
+    ],
+    [
+      "PWX",
+      "POLWAX"
+    ],
+    [
+      "PWXA",
+      "POLWAX-PDA"
+    ],
+    [
+      "QNA",
+      "QNATECHNO"
+    ],
+    [
+      "QNT",
+      "QUANTUM"
+    ],
+    [
+      "QRS",
+      "QUERCUS"
+    ],
+    [
+      "RAF",
+      "RAFAMET"
+    ],
+    [
+      "RBW",
+      "RAINBOW"
+    ],
+    [
+      "RDL",
+      "RADPOL"
+    ],
+    [
+      "REG",
+      "REGNON"
+    ],
+    [
+      "REXA",
+      "REX-PDA"
+    ],
+    [
+      "RFK",
+      "RAFAKO"
+    ],
+    [
+      "RMK",
+      "REMAK"
+    ],
+    [
+      "RNC",
+      "REINO"
+    ],
+    [
+      "RND",
+      "RENDER"
+    ],
+    [
+      "ROB",
+      "ROBYG"
+    ],
+    [
+      "ROBA",
+      "ROBYG-PDA"
+    ],
+    [
+      "RPC",
+      "ROPCZYCE"
+    ],
+    [
+      "RVU",
+      "RYVU"
+    ],
+    [
+      "RVUA",
+      "RYVU-PDA"
+    ],
+    [
+      "RWL",
+      "RAWLPLUG"
+    ],
+    [
+      "S2B",
+      "SYN2BIO"
+    ],
+    [
+      "SCP",
+      "SCPFL"
+    ],
+    [
+      "SCW",
+      "SCANWAY"
+    ],
+    [
+      "SEK",
+      "SEKO"
+    ],
+    [
+      "SEN",
+      "SERINUS"
+    ],
+    [
+      "SFS",
+      "SFINKS"
+    ],
+    [
+      "SGR",
+      "SADOVAYA"
+    ],
+    [
+      "SHD",
+      "SOHODEV"
+    ],
+    [
+      "SHG",
+      "STARHEDGE"
+    ],
+    [
+      "SHO",
+      "SHOPER"
+    ],
+    [
+      "SIM",
+      "SIMFABRIC"
+    ],
+    [
+      "SKH",
+      "SKARBIEC"
+    ],
+    [
+      "SLV",
+      "SELVITA"
+    ],
+    [
+      "SLVA",
+      "SELVITA-PDA"
+    ],
+    [
+      "SLZ",
+      "SLEEPZAG"
+    ],
+    [
+      "SNT",
+      "SYNEKTIK"
+    ],
+    [
+      "SNW",
+      "SANWIL"
+    ],
+    [
+      "SNX",
+      "SUNEX"
+    ],
+    [
+      "SOL",
+      "SOLAR"
+    ],
+    [
+      "SON",
+      "SONEL"
+    ],
+    [
+      "SPH",
+      "SOPHARMA"
+    ],
+    [
+      "SPR",
+      "SPYROSOFT"
+    ],
+    [
+      "STF",
+      "STALPROFI"
+    ],
+    [
+      "STP",
+      "STALPROD"
+    ],
+    [
+      "STS",
+      "SATIS"
+    ],
+    [
+      "SVE",
+      "SNTVERSE"
+    ],
+    [
+      "SWD",
+      "SWISSMED"
+    ],
+    [
+      "SWG",
+      "SECOGROUP"
+    ],
+    [
+      "TAR",
+      "TARCZYNSKI"
+    ],
+    [
+      "TBL",
+      "TBULL"
+    ],
+    [
+      "THG",
+      "TENDERHUT"
+    ],
+    [
+      "TLX",
+      "TALEX"
+    ],
+    [
+      "TNX",
+      "TALANX"
+    ],
+    [
+      "TOA",
+      "TOYA"
+    ],
+    [
+      "TOR",
+      "TORPOL"
+    ],
+    [
+      "TOW",
+      "TOWERINVT"
+    ],
+    [
+      "TRI",
+      "TRITON"
+    ],
+    [
+      "TRK",
+      "TRAKCJA"
+    ],
+    [
+      "TRR",
+      "TERMOREX"
+    ],
+    [
+      "TXT",
+      "TEXT"
+    ],
+    [
+      "UCG",
+      "UNICREDIT"
+    ],
+    [
+      "ULM",
+      "ULMA"
+    ],
+    [
+      "UNF",
+      "UNFOLD"
+    ],
+    [
+      "UNT",
+      "UNIMOT"
+    ],
+    [
+      "URS",
+      "URSUS"
+    ],
+    [
+      "URT",
+      "URTESTE"
+    ],
+    [
+      "URTA",
+      "URTESTE-PDA"
+    ],
+    [
+      "VGOA",
+      "VIGOPHOTN-PDA"
+    ],
+    [
+      "VIN",
+      "VINDEXUS"
+    ],
+    [
+      "VOX",
+      "VOXEL"
+    ],
+    [
+      "VRCA",
+      "VERCOM-PDA"
+    ],
+    [
+      "VTL",
+      "VISTAL"
+    ],
+    [
+      "VVD",
+      "VIVID"
+    ],
+    [
+      "WAS",
+      "WASKO"
+    ],
+    [
+      "WIK",
+      "WIKANA"
+    ],
+    [
+      "WIS",
+      "WINVEST"
+    ],
+    [
+      "WLT",
+      "WIELTON"
+    ],
+    [
+      "WPR",
+      "WOODPCKR"
+    ],
+    [
+      "WXF",
+      "WARIMPEX"
+    ],
+    [
+      "XPL",
+      "XPLUS"
+    ],
+    [
+      "XTP",
+      "XTPL"
+    ],
+    [
+      "YAN",
+      "YANOSIK"
+    ],
+    [
+      "YOL",
+      "YOLO"
+    ],
+    [
+      "YRL",
+      "YARRL"
+    ],
+    [
+      "ZAB",
+      "ZABKA"
+    ],
+    [
+      "ZAP",
+      "PULAWY"
     ]
   ],
-  "newconnect": {
-    "4MB": "4Mobility SA",
-    "AAL": "Alligator SA",
-    "ABW": "ABW SA",
-    "ACT": "Action SA",
-    "ADV": "Adv SA",
-    "AER": "Aerospace SA",
-    "AGO": "Agio SA",
-    "AIT": "Ait SA",
-    "ALC": "Alchimia SA",
-    "ALL": "All SA",
-    "ALW": "Alwernia SA",
-    "AMW": "Amw SA",
-    "APL": "Aplisens SA",
-    "ARC": "Arctic SA",
-    "ARM": "Armatura SA",
-    "ARR": "Arrinera SA",
-    "ART": "Artini SA",
-    "ASA": "Asa SA",
-    "ATC": "Atc SA",
-    "ATM": "Atm SA",
-    "AUT": "Automatyka SA",
-    "AVL": "Avallon SA",
-    "AVT": "Avtech SA",
-    "BAK": "Bakalland SA",
-    "BAN": "Bank SA",
-    "BAT": "Bat SA",
-    "BBT": "Bbt SA",
-    "BCS": "Bcs SA",
-    "BDA": "Bda SA",
-    "BEE": "Bee SA",
-    "BFC": "Bfc SA",
-    "BFT": "Bft SA",
-    "BGC": "Bgc SA",
-    "BHM": "Bhm SA",
-    "BIN": "Bin SA",
-    "BIO": "Bio SA",
-    "BJK": "Bjk SA",
-    "BKM": "Bkm SA",
-    "BLC": "Blc SA",
-    "BLU": "Blue SA",
-    "BMC": "Bmc SA",
-    "BML": "Bml SA",
-    "BMP": "Bmp SA",
-    "BNS": "Bns SA",
-    "BOL": "Bol SA",
-    "BPT": "Bpt SA",
-    "BRN": "Brn SA",
-    "BRW": "Brw SA",
-    "BST": "Bst SA",
-    "BTC": "Btc SA",
-    "BTG": "Btg SA",
-    "BTH": "Bth SA",
-    "BTK": "Btk SA",
-    "BTS": "Bts SA",
-    "BUM": "Bum SA",
-    "BVT": "Bvt SA",
-    "BWZ": "Bwz SA",
-    "BYT": "Byt SA",
-    "C2P": "C2p SA",
-    "CAM": "Cam SA",
-    "CAP": "Cap SA",
-    "CAR": "Car SA",
-    "CAS": "Cas SA",
-    "CAT": "Cat SA",
-    "CAV": "Cav SA",
-    "CBE": "Cbe SA",
-    "CBS": "Cbs SA",
-    "CCB": "Ccb SA",
-    "CDL": "Cdl SA",
-    "CDS": "Cds SA",
-    "CEE": "Cee SA",
-    "CET": "Cet SA",
-    "CFG": "Cfg SA",
-    "CFT": "Cft SA",
-    "CGM": "Cgm SA",
-    "CHM": "Chm SA",
-    "CIE": "Cie SA",
-    "CIG": "Cig SA",
-    "CKS": "Cks SA",
-    "CLD": "Cld SA",
-    "CLM": "Clm SA",
-    "CLN": "Cln SA",
-    "CLS": "Cls SA",
-    "CLW": "Clw SA",
-    "CMC": "Cmc SA",
-    "CMR": "Cmr SA",
-    "CNT": "Cnt SA",
-    "COB": "Cob SA",
-    "COG": "Cog SA",
-    "COM": "Com SA",
-    "COR": "Cor SA",
-    "COT": "Cot SA",
-    "COV": "Cov SA",
-    "CPI": "Cpi SA",
-    "CPL": "Cpl SA",
-    "CPM": "Cpm SA",
-    "CPN": "Cpn SA",
-    "CPS": "Cps SA",
-    "CPT": "Cpt SA",
-    "CPX": "Cpx SA",
-    "CRC": "Crc SA",
-    "CRE": "Cre SA",
-    "CRI": "Cri SA",
-    "CRM": "Crm SA",
-    "CRS": "Crs SA",
-    "CRT": "Crt SA",
-    "CRY": "Cry SA",
-    "CSG": "Csg SA",
-    "CSL": "Csl SA",
-    "CST": "Cst SA",
-    "CTB": "Ctb SA",
-    "CTG": "Ctg SA",
-    "CTI": "Cti SA",
-    "CTS": "Cts SA",
-    "CTX": "Ctx SA",
-    "CUB": "Cub SA",
-    "CVD": "Cvd SA",
-    "CVI": "Cvi SA",
-    "CWP": "Cwp SA",
-    "CWT": "Cwt SA",
-    "CXA": "Cxa SA",
-    "CXP": "Cxp SA",
-    "CYB": "Cyb SA",
-    "D2D": "D2d SA",
-    "DAT": "Dat SA",
-    "DBT": "Dbt SA",
-    "DCA": "Dca SA",
-    "DCR": "Dcr SA",
-    "DDL": "Ddl SA",
-    "DEC": "Dec SA",
-    "DEL": "Del SA",
-    "DEN": "Den SA",
-    "DES": "Des SA",
-    "DEZ": "Dez SA",
-    "DFP": "Dfp SA",
-    "DGA": "Dga SA",
-    "DIF": "Dif SA",
-    "DIG": "Dig SA",
-    "DIR": "Dir SA",
-    "DIS": "Dis SA",
-    "DKR": "Dkr SA",
-    "DLK": "Dlk SA",
-    "DMR": "Dmr SA",
-    "DNC": "Dnc SA",
-    "DNV": "Dnv SA",
-    "DPM": "Dpm SA",
-    "DPT": "Dpt SA",
-    "DRE": "Dre SA",
-    "DRG": "Drg SA",
-    "DRU": "Dru SA",
-    "DSL": "Dsl SA",
-    "DSO": "Dso SA",
-    "DSP": "Dsp SA",
-    "DSW": "Dsw SA",
-    "DTX": "Dtx SA",
-    "DUB": "Dub SA",
-    "DUD": "Dud SA",
-    "DVG": "Dvg SA",
-    "DVT": "Dvt SA",
-    "DWG": "Dwg SA",
-    "DXM": "Dxm SA",
-    "DYL": "Dyl SA",
-    "DYP": "Dyp SA",
-    "DYW": "Dyw SA",
-    "DZR": "Dzr SA",
-    "EAA": "Eaa SA",
-    "EAT": "Eat SA",
-    "EBL": "Ebl SA",
-    "EBT": "Ebt SA",
-    "ECA": "Eca SA",
-    "ECG": "Ecg SA",
-    "ECO": "Eco SA",
-    "ECS": "Ecs SA",
-    "EDI": "Edi SA",
-    "EDU": "Edu SA",
-    "EEC": "Eec SA",
-    "EFK": "Efk SA",
-    "EFM": "Efm SA",
-    "EGH": "Egh SA",
-    "EIN": "Ein SA",
-    "EKD": "Ekd SA",
-    "EKO": "Eko SA",
-    "EKT": "Ekt SA",
-    "ELB": "Elb SA",
-    "ELD": "Eld SA",
-    "ELE": "Ele SA",
-    "ELF": "Elf SA",
-    "ELG": "Elg SA",
-    "ELM": "Elm SA",
-    "ELS": "Els SA",
-    "ELZ": "Elz SA",
-    "EMC": "Emc SA",
-    "EMI": "Emi SA",
-    "EML": "Eml SA",
-    "EMP": "Emp SA",
-    "EMS": "Ems SA",
-    "ENA": "Ena SA",
-    "ENC": "Enc SA",
-    "END": "End SA",
-    "ENI": "Eni SA",
-    "ENM": "Enm SA",
-    "ENS": "Ens SA",
-    "ENT": "Ent SA",
-    "EOL": "Eol SA",
-    "EPD": "Epd SA",
-    "EPM": "Epm SA",
-    "EPT": "Ept SA",
-    "ERB": "Erb SA",
-    "ERG": "Erg SA",
-    "ERM": "Erm SA",
-    "ERR": "Err SA",
-    "ERS": "Ers SA",
-    "ERT": "Ert SA",
-    "ESA": "Esa SA",
-    "ESG": "Esg SA",
-    "ESO": "Eso SA",
-    "ESP": "Esp SA",
-    "ESS": "Ess SA",
-    "EST": "Est SA",
-    "ESW": "Esw SA",
-    "ETS": "Ets SA",
-    "EUK": "Euk SA",
-    "EUR": "Eur SA",
-    "EVO": "Evo SA",
-    "EVT": "Evt SA",
-    "EWA": "Ewa SA",
-    "EWO": "Ewo SA",
-    "EXA": "Exa SA",
-    "EXC": "Exc SA",
-    "EXE": "Exe SA",
-    "EXP": "Exp SA",
-    "EXT": "Ext SA",
-    "F2F": "F2f SA",
-    "FAB": "Fab SA",
-    "FAM": "Fam SA",
-    "FAN": "Fan SA",
-    "FAR": "Far SA",
-    "FAS": "Fas SA",
-    "FCA": "Fca SA",
-    "FCB": "Fcb SA",
-    "FCL": "Fcl SA",
-    "FCO": "Fco SA",
-    "FCR": "Fcr SA",
-    "FCU": "Fcu SA",
-    "FDF": "Fdf SA",
-    "FDX": "Fdx SA",
-    "FEB": "Feb SA",
-    "FEE": "Fee SA",
-    "FEM": "Fem SA",
-    "FER": "Fer SA",
-    "FFA": "Ffa SA",
-    "FGM": "Fgm SA",
-    "FID": "Fid SA",
-    "FIG": "Fig SA",
-    "FII": "Fii SA",
-    "FIL": "Fil SA",
-    "FIN": "Fin SA",
-    "FIS": "Fis SA",
-    "FIT": "Fit SA",
-    "FIV": "Fiv SA",
-    "FIX": "Fix SA",
-    "FJZ": "Fjz SA",
-    "FLA": "Fla SA",
-    "FLM": "Flm SA",
-    "FLR": "Flr SA",
-    "FLU": "Flu SA",
-    "FLX": "Flx SA",
-    "FMC": "Fmc SA",
-    "FMK": "Fmk SA",
-    "FMP": "Fmp SA",
-    "FNE": "Fne SA",
-    "FNP": "Fnp SA",
-    "FNT": "Fnt SA",
-    "FOB": "Fob SA",
-    "FOC": "Foc SA",
-    "FON": "Fon SA",
-    "FOR": "For SA",
-    "FOS": "Fos SA",
-    "FOX": "Fox SA",
-    "FPG": "Fpg SA",
-    "FRA": "Fra SA",
-    "FRB": "Frb SA",
-    "FRC": "Frc SA",
-    "FRE": "Fre SA",
-    "FRG": "Frg SA",
-    "FRK": "Frk SA",
-    "FRM": "Frm SA",
-    "FRO": "Fro SA",
-    "FRP": "Frp SA",
-    "FRT": "Frt SA",
-    "FRU": "Fru SA",
-    "FRW": "Frw SA",
-    "FSB": "Fsb SA",
-    "FSE": "Fse SA",
-    "FSL": "Fsl SA",
-    "FSN": "Fsn SA",
-    "FSO": "Fso SA",
-    "FSR": "Fsr SA",
-    "FST": "Fst SA",
-    "FSW": "Fsw SA",
-    "FTA": "Fta SA",
-    "FTB": "Ftb SA",
-    "FTE": "Fte SA",
-    "FTG": "Ftg SA",
-    "FTK": "Ftk SA",
-    "FTL": "Ftl SA",
-    "FTN": "Ftn SA",
-    "FTR": "Ftr SA",
-    "FTS": "Fts SA",
-    "FTT": "Ftt SA",
-    "FTX": "Ftx SA",
-    "FUE": "Fue SA",
-    "FUM": "Fum SA",
-    "FUN": "Fun SA",
-    "FVR": "Fvr SA",
-    "FVS": "Fvs SA"
-  }
+  "newconnect": [
+    [
+      "4MB",
+      "4Mobility SA"
+    ],
+    [
+      "AAL",
+      "Alligator SA"
+    ],
+    [
+      "ABW",
+      "ABW SA"
+    ],
+    [
+      "ACT",
+      "Action SA"
+    ],
+    [
+      "ADV",
+      "Adv SA"
+    ],
+    [
+      "AER",
+      "Aerospace SA"
+    ],
+    [
+      "AGO",
+      "Agio SA"
+    ],
+    [
+      "AIT",
+      "Ait SA"
+    ],
+    [
+      "ALC",
+      "Alchimia SA"
+    ],
+    [
+      "ALL",
+      "All SA"
+    ],
+    [
+      "ALW",
+      "Alwernia SA"
+    ],
+    [
+      "AMW",
+      "Amw SA"
+    ],
+    [
+      "APL",
+      "Aplisens SA"
+    ],
+    [
+      "ARC",
+      "Arctic SA"
+    ],
+    [
+      "ARM",
+      "Armatura SA"
+    ],
+    [
+      "ARR",
+      "Arrinera SA"
+    ],
+    [
+      "ART",
+      "Artini SA"
+    ],
+    [
+      "ASA",
+      "Asa SA"
+    ],
+    [
+      "ATC",
+      "Atc SA"
+    ],
+    [
+      "ATM",
+      "Atm SA"
+    ],
+    [
+      "AUT",
+      "Automatyka SA"
+    ],
+    [
+      "AVL",
+      "Avallon SA"
+    ],
+    [
+      "AVT",
+      "Avtech SA"
+    ],
+    [
+      "BAK",
+      "Bakalland SA"
+    ],
+    [
+      "BAN",
+      "Bank SA"
+    ],
+    [
+      "BAT",
+      "Bat SA"
+    ],
+    [
+      "BBT",
+      "Bbt SA"
+    ],
+    [
+      "BCS",
+      "Bcs SA"
+    ],
+    [
+      "BDA",
+      "Bda SA"
+    ],
+    [
+      "BEE",
+      "Bee SA"
+    ],
+    [
+      "BFC",
+      "Bfc SA"
+    ],
+    [
+      "BFT",
+      "Bft SA"
+    ],
+    [
+      "BGC",
+      "Bgc SA"
+    ],
+    [
+      "BHM",
+      "Bhm SA"
+    ],
+    [
+      "BIN",
+      "Bin SA"
+    ],
+    [
+      "BIO",
+      "Bio SA"
+    ],
+    [
+      "BJK",
+      "Bjk SA"
+    ],
+    [
+      "BKM",
+      "Bkm SA"
+    ],
+    [
+      "BLC",
+      "Blc SA"
+    ],
+    [
+      "BLU",
+      "Blue SA"
+    ],
+    [
+      "BMC",
+      "Bmc SA"
+    ],
+    [
+      "BML",
+      "Bml SA"
+    ],
+    [
+      "BMP",
+      "Bmp SA"
+    ],
+    [
+      "BNS",
+      "Bns SA"
+    ],
+    [
+      "BOL",
+      "Bol SA"
+    ],
+    [
+      "BPT",
+      "Bpt SA"
+    ],
+    [
+      "BRN",
+      "Brn SA"
+    ],
+    [
+      "BRW",
+      "Brw SA"
+    ],
+    [
+      "BST",
+      "Bst SA"
+    ],
+    [
+      "BTC",
+      "Btc SA"
+    ],
+    [
+      "BTG",
+      "Btg SA"
+    ],
+    [
+      "BTH",
+      "Bth SA"
+    ],
+    [
+      "BTK",
+      "Btk SA"
+    ],
+    [
+      "BTS",
+      "Bts SA"
+    ],
+    [
+      "BUM",
+      "Bum SA"
+    ],
+    [
+      "BVT",
+      "Bvt SA"
+    ],
+    [
+      "BWZ",
+      "Bwz SA"
+    ],
+    [
+      "BYT",
+      "Byt SA"
+    ],
+    [
+      "C2P",
+      "C2p SA"
+    ],
+    [
+      "CAM",
+      "Cam SA"
+    ],
+    [
+      "CAP",
+      "Cap SA"
+    ],
+    [
+      "CAR",
+      "Car SA"
+    ],
+    [
+      "CAS",
+      "Cas SA"
+    ],
+    [
+      "CAT",
+      "Cat SA"
+    ],
+    [
+      "CAV",
+      "Cav SA"
+    ],
+    [
+      "CBE",
+      "Cbe SA"
+    ],
+    [
+      "CBS",
+      "Cbs SA"
+    ],
+    [
+      "CCB",
+      "Ccb SA"
+    ],
+    [
+      "CDL",
+      "Cdl SA"
+    ],
+    [
+      "CDS",
+      "Cds SA"
+    ],
+    [
+      "CEE",
+      "Cee SA"
+    ],
+    [
+      "CET",
+      "Cet SA"
+    ],
+    [
+      "CFG",
+      "Cfg SA"
+    ],
+    [
+      "CFT",
+      "Cft SA"
+    ],
+    [
+      "CGM",
+      "Cgm SA"
+    ],
+    [
+      "CHM",
+      "Chm SA"
+    ],
+    [
+      "CIE",
+      "Cie SA"
+    ],
+    [
+      "CIG",
+      "Cig SA"
+    ],
+    [
+      "CKS",
+      "Cks SA"
+    ],
+    [
+      "CLD",
+      "Cld SA"
+    ],
+    [
+      "CLM",
+      "Clm SA"
+    ],
+    [
+      "CLN",
+      "Cln SA"
+    ],
+    [
+      "CLS",
+      "Cls SA"
+    ],
+    [
+      "CLW",
+      "Clw SA"
+    ],
+    [
+      "CMC",
+      "Cmc SA"
+    ],
+    [
+      "CMR",
+      "Cmr SA"
+    ],
+    [
+      "CNT",
+      "Cnt SA"
+    ],
+    [
+      "COB",
+      "Cob SA"
+    ],
+    [
+      "COG",
+      "Cog SA"
+    ],
+    [
+      "COM",
+      "Com SA"
+    ],
+    [
+      "COR",
+      "Cor SA"
+    ],
+    [
+      "COT",
+      "Cot SA"
+    ],
+    [
+      "COV",
+      "Cov SA"
+    ],
+    [
+      "CPI",
+      "Cpi SA"
+    ],
+    [
+      "CPL",
+      "Cpl SA"
+    ],
+    [
+      "CPM",
+      "Cpm SA"
+    ],
+    [
+      "CPN",
+      "Cpn SA"
+    ],
+    [
+      "CPS",
+      "Cps SA"
+    ],
+    [
+      "CPT",
+      "Cpt SA"
+    ],
+    [
+      "CPX",
+      "Cpx SA"
+    ],
+    [
+      "CRC",
+      "Crc SA"
+    ],
+    [
+      "CRE",
+      "Cre SA"
+    ],
+    [
+      "CRI",
+      "Cri SA"
+    ],
+    [
+      "CRM",
+      "Crm SA"
+    ],
+    [
+      "CRS",
+      "Crs SA"
+    ],
+    [
+      "CRT",
+      "Crt SA"
+    ],
+    [
+      "CRY",
+      "Cry SA"
+    ],
+    [
+      "CSG",
+      "Csg SA"
+    ],
+    [
+      "CSL",
+      "Csl SA"
+    ],
+    [
+      "CST",
+      "Cst SA"
+    ],
+    [
+      "CTB",
+      "Ctb SA"
+    ],
+    [
+      "CTG",
+      "Ctg SA"
+    ],
+    [
+      "CTI",
+      "Cti SA"
+    ],
+    [
+      "CTS",
+      "Cts SA"
+    ],
+    [
+      "CTX",
+      "Ctx SA"
+    ],
+    [
+      "CUB",
+      "Cub SA"
+    ],
+    [
+      "CVD",
+      "Cvd SA"
+    ],
+    [
+      "CVI",
+      "Cvi SA"
+    ],
+    [
+      "CWP",
+      "Cwp SA"
+    ],
+    [
+      "CWT",
+      "Cwt SA"
+    ],
+    [
+      "CXA",
+      "Cxa SA"
+    ],
+    [
+      "CXP",
+      "Cxp SA"
+    ],
+    [
+      "CYB",
+      "Cyb SA"
+    ],
+    [
+      "D2D",
+      "D2d SA"
+    ],
+    [
+      "DAT",
+      "Dat SA"
+    ],
+    [
+      "DBT",
+      "Dbt SA"
+    ],
+    [
+      "DCA",
+      "Dca SA"
+    ],
+    [
+      "DCR",
+      "Dcr SA"
+    ],
+    [
+      "DDL",
+      "Ddl SA"
+    ],
+    [
+      "DEC",
+      "Dec SA"
+    ],
+    [
+      "DEL",
+      "Del SA"
+    ],
+    [
+      "DEN",
+      "Den SA"
+    ],
+    [
+      "DES",
+      "Des SA"
+    ],
+    [
+      "DEZ",
+      "Dez SA"
+    ],
+    [
+      "DFP",
+      "Dfp SA"
+    ],
+    [
+      "DGA",
+      "Dga SA"
+    ],
+    [
+      "DIF",
+      "Dif SA"
+    ],
+    [
+      "DIG",
+      "Dig SA"
+    ],
+    [
+      "DIR",
+      "Dir SA"
+    ],
+    [
+      "DIS",
+      "Dis SA"
+    ],
+    [
+      "DKR",
+      "Dkr SA"
+    ],
+    [
+      "DLK",
+      "Dlk SA"
+    ],
+    [
+      "DMR",
+      "Dmr SA"
+    ],
+    [
+      "DNC",
+      "Dnc SA"
+    ],
+    [
+      "DNV",
+      "Dnv SA"
+    ],
+    [
+      "DPM",
+      "Dpm SA"
+    ],
+    [
+      "DPT",
+      "Dpt SA"
+    ],
+    [
+      "DRE",
+      "Dre SA"
+    ],
+    [
+      "DRG",
+      "Drg SA"
+    ],
+    [
+      "DRU",
+      "Dru SA"
+    ],
+    [
+      "DSL",
+      "Dsl SA"
+    ],
+    [
+      "DSO",
+      "Dso SA"
+    ],
+    [
+      "DSP",
+      "Dsp SA"
+    ],
+    [
+      "DSW",
+      "Dsw SA"
+    ],
+    [
+      "DTX",
+      "Dtx SA"
+    ],
+    [
+      "DUB",
+      "Dub SA"
+    ],
+    [
+      "DUD",
+      "Dud SA"
+    ],
+    [
+      "DVG",
+      "Dvg SA"
+    ],
+    [
+      "DVT",
+      "Dvt SA"
+    ],
+    [
+      "DWG",
+      "Dwg SA"
+    ],
+    [
+      "DXM",
+      "Dxm SA"
+    ],
+    [
+      "DYL",
+      "Dyl SA"
+    ],
+    [
+      "DYP",
+      "Dyp SA"
+    ],
+    [
+      "DYW",
+      "Dyw SA"
+    ],
+    [
+      "DZR",
+      "Dzr SA"
+    ],
+    [
+      "EAA",
+      "Eaa SA"
+    ],
+    [
+      "EAT",
+      "Eat SA"
+    ],
+    [
+      "EBL",
+      "Ebl SA"
+    ],
+    [
+      "EBT",
+      "Ebt SA"
+    ],
+    [
+      "ECA",
+      "Eca SA"
+    ],
+    [
+      "ECG",
+      "Ecg SA"
+    ],
+    [
+      "ECO",
+      "Eco SA"
+    ],
+    [
+      "ECS",
+      "Ecs SA"
+    ],
+    [
+      "EDI",
+      "Edi SA"
+    ],
+    [
+      "EDU",
+      "Edu SA"
+    ],
+    [
+      "EEC",
+      "Eec SA"
+    ],
+    [
+      "EFK",
+      "Efk SA"
+    ],
+    [
+      "EFM",
+      "Efm SA"
+    ],
+    [
+      "EGH",
+      "Egh SA"
+    ],
+    [
+      "EIN",
+      "Ein SA"
+    ],
+    [
+      "EKD",
+      "Ekd SA"
+    ],
+    [
+      "EKO",
+      "Eko SA"
+    ],
+    [
+      "EKT",
+      "Ekt SA"
+    ],
+    [
+      "ELB",
+      "Elb SA"
+    ],
+    [
+      "ELD",
+      "Eld SA"
+    ],
+    [
+      "ELE",
+      "Ele SA"
+    ],
+    [
+      "ELF",
+      "Elf SA"
+    ],
+    [
+      "ELG",
+      "Elg SA"
+    ],
+    [
+      "ELM",
+      "Elm SA"
+    ],
+    [
+      "ELS",
+      "Els SA"
+    ],
+    [
+      "ELZ",
+      "Elz SA"
+    ],
+    [
+      "EMC",
+      "Emc SA"
+    ],
+    [
+      "EMI",
+      "Emi SA"
+    ],
+    [
+      "EML",
+      "Eml SA"
+    ],
+    [
+      "EMP",
+      "Emp SA"
+    ],
+    [
+      "EMS",
+      "Ems SA"
+    ],
+    [
+      "ENA",
+      "Ena SA"
+    ],
+    [
+      "ENC",
+      "Enc SA"
+    ],
+    [
+      "END",
+      "End SA"
+    ],
+    [
+      "ENI",
+      "Eni SA"
+    ],
+    [
+      "ENM",
+      "Enm SA"
+    ],
+    [
+      "ENS",
+      "Ens SA"
+    ],
+    [
+      "ENT",
+      "Ent SA"
+    ],
+    [
+      "EOL",
+      "Eol SA"
+    ],
+    [
+      "EPD",
+      "Epd SA"
+    ],
+    [
+      "EPM",
+      "Epm SA"
+    ],
+    [
+      "EPT",
+      "Ept SA"
+    ],
+    [
+      "ERB",
+      "Erb SA"
+    ],
+    [
+      "ERG",
+      "Erg SA"
+    ],
+    [
+      "ERM",
+      "Erm SA"
+    ],
+    [
+      "ERR",
+      "Err SA"
+    ],
+    [
+      "ERS",
+      "Ers SA"
+    ],
+    [
+      "ERT",
+      "Ert SA"
+    ],
+    [
+      "ESA",
+      "Esa SA"
+    ],
+    [
+      "ESG",
+      "Esg SA"
+    ],
+    [
+      "ESO",
+      "Eso SA"
+    ],
+    [
+      "ESP",
+      "Esp SA"
+    ],
+    [
+      "ESS",
+      "Ess SA"
+    ],
+    [
+      "EST",
+      "Est SA"
+    ],
+    [
+      "ESW",
+      "Esw SA"
+    ],
+    [
+      "ETS",
+      "Ets SA"
+    ],
+    [
+      "EUK",
+      "Euk SA"
+    ],
+    [
+      "EUR",
+      "Eur SA"
+    ],
+    [
+      "EVO",
+      "Evo SA"
+    ],
+    [
+      "EVT",
+      "Evt SA"
+    ],
+    [
+      "EWA",
+      "Ewa SA"
+    ],
+    [
+      "EWO",
+      "Ewo SA"
+    ],
+    [
+      "EXA",
+      "Exa SA"
+    ],
+    [
+      "EXC",
+      "Exc SA"
+    ],
+    [
+      "EXE",
+      "Exe SA"
+    ],
+    [
+      "EXP",
+      "Exp SA"
+    ],
+    [
+      "EXT",
+      "Ext SA"
+    ],
+    [
+      "F2F",
+      "F2f SA"
+    ],
+    [
+      "FAB",
+      "Fab SA"
+    ],
+    [
+      "FAM",
+      "Fam SA"
+    ],
+    [
+      "FAN",
+      "Fan SA"
+    ],
+    [
+      "FAR",
+      "Far SA"
+    ],
+    [
+      "FAS",
+      "Fas SA"
+    ],
+    [
+      "FCA",
+      "Fca SA"
+    ],
+    [
+      "FCB",
+      "Fcb SA"
+    ],
+    [
+      "FCL",
+      "Fcl SA"
+    ],
+    [
+      "FCO",
+      "Fco SA"
+    ],
+    [
+      "FCR",
+      "Fcr SA"
+    ],
+    [
+      "FCU",
+      "Fcu SA"
+    ],
+    [
+      "FDF",
+      "Fdf SA"
+    ],
+    [
+      "FDX",
+      "Fdx SA"
+    ],
+    [
+      "FEB",
+      "Feb SA"
+    ],
+    [
+      "FEE",
+      "Fee SA"
+    ],
+    [
+      "FEM",
+      "Fem SA"
+    ],
+    [
+      "FER",
+      "Fer SA"
+    ],
+    [
+      "FFA",
+      "Ffa SA"
+    ],
+    [
+      "FGM",
+      "Fgm SA"
+    ],
+    [
+      "FID",
+      "Fid SA"
+    ],
+    [
+      "FIG",
+      "Fig SA"
+    ],
+    [
+      "FII",
+      "Fii SA"
+    ],
+    [
+      "FIL",
+      "Fil SA"
+    ],
+    [
+      "FIN",
+      "Fin SA"
+    ],
+    [
+      "FIS",
+      "Fis SA"
+    ],
+    [
+      "FIT",
+      "Fit SA"
+    ],
+    [
+      "FIV",
+      "Fiv SA"
+    ],
+    [
+      "FIX",
+      "Fix SA"
+    ],
+    [
+      "FJZ",
+      "Fjz SA"
+    ],
+    [
+      "FLA",
+      "Fla SA"
+    ],
+    [
+      "FLM",
+      "Flm SA"
+    ],
+    [
+      "FLR",
+      "Flr SA"
+    ],
+    [
+      "FLU",
+      "Flu SA"
+    ],
+    [
+      "FLX",
+      "Flx SA"
+    ],
+    [
+      "FMC",
+      "Fmc SA"
+    ],
+    [
+      "FMK",
+      "Fmk SA"
+    ],
+    [
+      "FMP",
+      "Fmp SA"
+    ],
+    [
+      "FNE",
+      "Fne SA"
+    ],
+    [
+      "FNP",
+      "Fnp SA"
+    ],
+    [
+      "FNT",
+      "Fnt SA"
+    ],
+    [
+      "FOB",
+      "Fob SA"
+    ],
+    [
+      "FOC",
+      "Foc SA"
+    ],
+    [
+      "FON",
+      "Fon SA"
+    ],
+    [
+      "FOR",
+      "For SA"
+    ],
+    [
+      "FOS",
+      "Fos SA"
+    ],
+    [
+      "FOX",
+      "Fox SA"
+    ],
+    [
+      "FPG",
+      "Fpg SA"
+    ],
+    [
+      "FRA",
+      "Fra SA"
+    ],
+    [
+      "FRB",
+      "Frb SA"
+    ],
+    [
+      "FRC",
+      "Frc SA"
+    ],
+    [
+      "FRE",
+      "Fre SA"
+    ],
+    [
+      "FRG",
+      "Frg SA"
+    ],
+    [
+      "FRK",
+      "Frk SA"
+    ],
+    [
+      "FRM",
+      "Frm SA"
+    ],
+    [
+      "FRO",
+      "Fro SA"
+    ],
+    [
+      "FRP",
+      "Frp SA"
+    ],
+    [
+      "FRT",
+      "Frt SA"
+    ],
+    [
+      "FRU",
+      "Fru SA"
+    ],
+    [
+      "FRW",
+      "Frw SA"
+    ],
+    [
+      "FSB",
+      "Fsb SA"
+    ],
+    [
+      "FSE",
+      "Fse SA"
+    ],
+    [
+      "FSL",
+      "Fsl SA"
+    ],
+    [
+      "FSN",
+      "Fsn SA"
+    ],
+    [
+      "FSO",
+      "Fso SA"
+    ],
+    [
+      "FSR",
+      "Fsr SA"
+    ],
+    [
+      "FST",
+      "Fst SA"
+    ],
+    [
+      "FSW",
+      "Fsw SA"
+    ],
+    [
+      "FTA",
+      "Fta SA"
+    ],
+    [
+      "FTB",
+      "Ftb SA"
+    ],
+    [
+      "FTE",
+      "Fte SA"
+    ],
+    [
+      "FTG",
+      "Ftg SA"
+    ],
+    [
+      "FTK",
+      "Ftk SA"
+    ],
+    [
+      "FTL",
+      "Ftl SA"
+    ],
+    [
+      "FTN",
+      "Ftn SA"
+    ],
+    [
+      "FTR",
+      "Ftr SA"
+    ],
+    [
+      "FTS",
+      "Fts SA"
+    ],
+    [
+      "FTT",
+      "Ftt SA"
+    ],
+    [
+      "FTX",
+      "Ftx SA"
+    ],
+    [
+      "FUE",
+      "Fue SA"
+    ],
+    [
+      "FUM",
+      "Fum SA"
+    ],
+    [
+      "FUN",
+      "Fun SA"
+    ],
+    [
+      "FVR",
+      "Fvr SA"
+    ],
+    [
+      "FVS",
+      "Fvs SA"
+    ],
+    [
+      "2CP",
+      "2CPARTNER"
+    ],
+    [
+      "7FT",
+      "7FIT"
+    ],
+    [
+      "7LV",
+      "7LEVELS"
+    ],
+    [
+      "ABK",
+      "ABAK"
+    ],
+    [
+      "AFC",
+      "AKCEPTFIN"
+    ],
+    [
+      "AFH",
+      "AFHOL"
+    ],
+    [
+      "AGL",
+      "AGROLIGA"
+    ],
+    [
+      "AGP",
+      "AGROMEP"
+    ],
+    [
+      "AIN",
+      "ABSINVEST"
+    ],
+    [
+      "ALS",
+      "ALEJA"
+    ],
+    [
+      "AME",
+      "AMESA"
+    ],
+    [
+      "AOL",
+      "ANALIZY"
+    ],
+    [
+      "APA",
+      "APANET"
+    ],
+    [
+      "APC",
+      "APOLLO"
+    ],
+    [
+      "APS",
+      "APS"
+    ],
+    [
+      "AQA",
+      "AQUAPOZ"
+    ],
+    [
+      "AQT",
+      "AQUATECH"
+    ],
+    [
+      "AQU",
+      "AQUABB"
+    ],
+    [
+      "ARG",
+      "ARTGAMES"
+    ],
+    [
+      "ARI",
+      "ARI"
+    ],
+    [
+      "ASP",
+      "AUTOSPA"
+    ],
+    [
+      "ASR",
+      "ASTRO"
+    ],
+    [
+      "ATA",
+      "ATCCARGO"
+    ],
+    [
+      "ATJ",
+      "ATOMJELLY"
+    ],
+    [
+      "ATO",
+      "ATONHT"
+    ],
+    [
+      "AUX",
+      "AUXILIA"
+    ],
+    [
+      "AVE",
+      "ADVERTIGO"
+    ],
+    [
+      "AZC",
+      "AZTEC"
+    ],
+    [
+      "BAC",
+      "BACT"
+    ],
+    [
+      "BCI",
+      "BALTICINV"
+    ],
+    [
+      "BDG",
+      "BROADGATE"
+    ],
+    [
+      "BEP",
+      "BIOMASS"
+    ],
+    [
+      "BER",
+      "BIOERG"
+    ],
+    [
+      "BGD",
+      "BIOGENED"
+    ],
+    [
+      "BHX",
+      "BINARY"
+    ],
+    [
+      "BIG",
+      "BASEIG"
+    ],
+    [
+      "BKD",
+      "BKDGAMES"
+    ],
+    [
+      "BLF",
+      "BELEAF"
+    ],
+    [
+      "BLT",
+      "BALTICON"
+    ],
+    [
+      "BPC",
+      "BPC"
+    ],
+    [
+      "BPN",
+      "BLACKPOIN"
+    ],
+    [
+      "BRH",
+      "BERGHOLDI"
+    ],
+    [
+      "BRO",
+      "CZARNKOW"
+    ],
+    [
+      "BRP",
+      "BLACKROSE"
+    ],
+    [
+      "BSA",
+      "BRAS"
+    ],
+    [
+      "BSH",
+      "BSH"
+    ],
+    [
+      "BSN",
+      "BRAINSCAN"
+    ],
+    [
+      "BTF",
+      "BTCS"
+    ],
+    [
+      "CAI",
+      "CARLSON"
+    ],
+    [
+      "CBD",
+      "CANNABIS"
+    ],
+    [
+      "CCR",
+      "CONSTANCE"
+    ],
+    [
+      "CCS",
+      "CCS"
+    ],
+    [
+      "CDA",
+      "CDA"
+    ],
+    [
+      "CFS",
+      "CFSA"
+    ],
+    [
+      "CHP",
+      "CHERRY"
+    ],
+    [
+      "CLA",
+      "CONSOLE"
+    ],
+    [
+      "CMI",
+      "CMI"
+    ],
+    [
+      "COS",
+      "COSMA"
+    ],
+    [
+      "CRB",
+      "CARBONSTU"
+    ],
+    [
+      "CRP",
+      "CEREALPLT"
+    ],
+    [
+      "CTE",
+      "CTEGROUP"
+    ],
+    [
+      "CTF",
+      "CENTURION"
+    ],
+    [
+      "CWA",
+      "CONSOLEW"
+    ],
+    [
+      "DCD",
+      "DCD"
+    ],
+    [
+      "DDI",
+      "DDISTANCE"
+    ],
+    [
+      "DFH",
+      "DEFENCEH"
+    ],
+    [
+      "DGN",
+      "DGNET"
+    ],
+    [
+      "DGS",
+      "DEMGAMES"
+    ],
+    [
+      "DIV",
+      "DIVOLIO"
+    ],
+    [
+      "DNS",
+      "DANKS"
+    ],
+    [
+      "DPG",
+      "DARKPOINT"
+    ],
+    [
+      "DRF",
+      "DRFINANCE"
+    ],
+    [
+      "DRZ",
+      "DORZECZY"
+    ],
+    [
+      "DUA",
+      "DUALITY"
+    ],
+    [
+      "EBX",
+      "EKOBOX"
+    ],
+    [
+      "ECC",
+      "ECCGAMES"
+    ],
+    [
+      "ECK",
+      "EUROSNACK"
+    ],
+    [
+      "ECL",
+      "ECL"
+    ],
+    [
+      "ECN",
+      "ECNOLOGY"
+    ],
+    [
+      "ECR",
+      "ECERAMICS"
+    ],
+    [
+      "ECT",
+      "ECO5TECH"
+    ],
+    [
+      "EDL",
+      "EDITELPL"
+    ],
+    [
+      "EEE",
+      "EKIPA"
+    ],
+    [
+      "EFE",
+      "EFENERGII"
+    ],
+    [
+      "EGY",
+      "ENERGY"
+    ],
+    [
+      "EKE",
+      "EKOOZE"
+    ],
+    [
+      "EKS",
+      "EKIOSK"
+    ],
+    [
+      "ELQ",
+      "ELQ"
+    ],
+    [
+      "EMM",
+      "EMMERSON"
+    ],
+    [
+      "EPR",
+      "EKOPARK"
+    ],
+    [
+      "ERA",
+      "ERATONRG"
+    ],
+    [
+      "ESK",
+      "ESKIMOS"
+    ],
+    [
+      "ETX",
+      "EUROTAX"
+    ],
+    [
+      "EUV",
+      "EUVIC"
+    ],
+    [
+      "EXM",
+      "EXIMIT"
+    ],
+    [
+      "F51",
+      "FARM51"
+    ],
+    [
+      "FFP",
+      "FARMYFO"
+    ],
+    [
+      "FHD",
+      "FHDOM"
+    ],
+    [
+      "FKD",
+      "FABRYKAKD"
+    ],
+    [
+      "FLD",
+      "FLUID"
+    ],
+    [
+      "FLG",
+      "FALCON"
+    ],
+    [
+      "FPO",
+      "FORPOSTA"
+    ],
+    [
+      "FTH",
+      "FINTECH"
+    ],
+    [
+      "FVE",
+      "FOTOVOLT"
+    ],
+    [
+      "GAL",
+      "GALVO"
+    ],
+    [
+      "GAR",
+      "GARIN"
+    ],
+    [
+      "GDC",
+      "GAMEDUST"
+    ],
+    [
+      "GDS",
+      "GDEVS"
+    ],
+    [
+      "GEM",
+      "GRUPAEMM"
+    ],
+    [
+      "GEN",
+      "GENOMED"
+    ],
+    [
+      "GHT",
+      "GAMEHUNT"
+    ],
+    [
+      "GHY",
+      "GHYDROGEN"
+    ],
+    [
+      "GKS",
+      "GKSKAT"
+    ],
+    [
+      "GLG",
+      "GLGPHARMA"
+    ],
+    [
+      "GME",
+      "GRMEDIA"
+    ],
+    [
+      "GMV",
+      "GAMIVO"
+    ],
+    [
+      "GMZ",
+      "GRUPAMZ"
+    ],
+    [
+      "GNG",
+      "GENRG"
+    ],
+    [
+      "GNR",
+      "GENERGY"
+    ],
+    [
+      "GOL",
+      "GOLAB"
+    ],
+    [
+      "GOV",
+      "GOVENA"
+    ],
+    [
+      "GRC",
+      "GRUPAREC"
+    ],
+    [
+      "GRE",
+      "GREENENER"
+    ],
+    [
+      "GRL",
+      "GREENLANE"
+    ],
+    [
+      "GRM",
+      "GREMPCO"
+    ],
+    [
+      "GRZ",
+      "GREENZEB"
+    ],
+    [
+      "GTF",
+      "GOTFI"
+    ],
+    [
+      "GTK",
+      "GEOTREKK"
+    ],
+    [
+      "GTS",
+      "GEOTRANS"
+    ],
+    [
+      "GX1",
+      "GENXONE"
+    ],
+    [
+      "HEF",
+      "HEFAL"
+    ],
+    [
+      "HEN",
+      "HYENERGY"
+    ],
+    [
+      "HER",
+      "HILANDER"
+    ],
+    [
+      "HMP",
+      "HEMP"
+    ],
+    [
+      "HOR",
+      "HORTICO"
+    ],
+    [
+      "HPE",
+      "HIPOWERSA"
+    ],
+    [
+      "HPG",
+      "HONEYPAY"
+    ],
+    [
+      "HPM",
+      "HIPROMINE"
+    ],
+    [
+      "HPS",
+      "HYDRAPRES"
+    ],
+    [
+      "HRC",
+      "GRUPAHRC"
+    ],
+    [
+      "HRL",
+      "HORNIGOLD"
+    ],
+    [
+      "HRT",
+      "HURTIMEX"
+    ],
+    [
+      "HUB",
+      "HUBTECH"
+    ],
+    [
+      "IBC",
+      "IBCPOLSKA"
+    ],
+    [
+      "ICA",
+      "INCANA"
+    ],
+    [
+      "ICD",
+      "ICPD"
+    ],
+    [
+      "ICG",
+      "ICECODE"
+    ],
+    [
+      "ICP",
+      "ICPGROUP"
+    ],
+    [
+      "IDH",
+      "IDH"
+    ],
+    [
+      "IFA",
+      "INFRA"
+    ],
+    [
+      "IFL",
+      "IFLEASING"
+    ],
+    [
+      "IGT",
+      "IGORIA"
+    ],
+    [
+      "IMG",
+      "IMMGAMES"
+    ],
+    [
+      "IMR",
+      "INTM"
+    ],
+    [
+      "INM",
+      "INVENTION"
+    ],
+    [
+      "INS",
+      "INDOS"
+    ],
+    [
+      "INT",
+      "INTERNITY"
+    ],
+    [
+      "IPW",
+      "IMAGEPWR"
+    ],
+    [
+      "ISD",
+      "INSIDPARK"
+    ],
+    [
+      "IVE",
+      "INVESTEKO"
+    ],
+    [
+      "IVO",
+      "INCUVO"
+    ],
+    [
+      "IWS",
+      "IRONWOLF"
+    ],
+    [
+      "JJB",
+      "JUJUBEE"
+    ],
+    [
+      "JRC",
+      "JRCGROUP"
+    ],
+    [
+      "K2P",
+      "KOOL2PLAY"
+    ],
+    [
+      "KBJ",
+      "KBJ"
+    ],
+    [
+      "KFM",
+      "KOFAMA"
+    ],
+    [
+      "KIN",
+      "KLEBAINV"
+    ],
+    [
+      "KLE",
+      "KLEPSYDRA"
+    ],
+    [
+      "KLK",
+      "KOLEJKOWO"
+    ],
+    [
+      "KLN",
+      "KLON"
+    ],
+    [
+      "KMB",
+      "KOMBINAT"
+    ],
+    [
+      "KME",
+      "KME"
+    ],
+    [
+      "KOR",
+      "KORBANK"
+    ],
+    [
+      "KPC",
+      "KUPIEC"
+    ],
+    [
+      "KPI",
+      "KANCELWEC"
+    ],
+    [
+      "KUB",
+      "KUBOTA"
+    ],
+    [
+      "LAN",
+      "LANGLOO"
+    ],
+    [
+      "LBD",
+      "LOKATYBUD"
+    ],
+    [
+      "LCN",
+      "LABOCANNA"
+    ],
+    [
+      "LEG",
+      "LEGIMI"
+    ],
+    [
+      "LET",
+      "LETUS"
+    ],
+    [
+      "LFR",
+      "LIFTERO"
+    ],
+    [
+      "LGT",
+      "LGTRADE"
+    ],
+    [
+      "LHD",
+      "LICHTHUND"
+    ],
+    [
+      "LKS",
+      "LKDESIGN"
+    ],
+    [
+      "LMG",
+      "LMGAMES"
+    ],
+    [
+      "LSH",
+      "LSTECHHOM"
+    ],
+    [
+      "LTG",
+      "LIBERTY"
+    ],
+    [
+      "LTM",
+      "LTGAMES"
+    ],
+    [
+      "LUD",
+      "LUDUS"
+    ],
+    [
+      "LUG",
+      "LUG"
+    ],
+    [
+      "LUK",
+      "LUKARDI"
+    ],
+    [
+      "LUO",
+      "LUON"
+    ],
+    [
+      "LUX",
+      "LUXIMA"
+    ],
+    [
+      "LXB",
+      "LEXBONO"
+    ],
+    [
+      "M4B",
+      "M4B"
+    ],
+    [
+      "MAD",
+      "MADKOM"
+    ],
+    [
+      "MAZ",
+      "MAZOP"
+    ],
+    [
+      "MBF",
+      "MBFGROUP"
+    ],
+    [
+      "MCD",
+      "MYCODERN"
+    ],
+    [
+      "MDA",
+      "MEDAPP"
+    ],
+    [
+      "MDB",
+      "MEDICOBIO"
+    ],
+    [
+      "MDP",
+      "MEDCAMP"
+    ],
+    [
+      "MDT",
+      "MEDTECH"
+    ],
+    [
+      "MER",
+      "MERA"
+    ],
+    [
+      "MFD",
+      "MFOOD"
+    ],
+    [
+      "MGA",
+      "MEGASONIC"
+    ],
+    [
+      "MGC",
+      "MEDGALIC"
+    ],
+    [
+      "MGS",
+      "MGAMES"
+    ],
+    [
+      "MID",
+      "MIDVEN"
+    ],
+    [
+      "MIG",
+      "MILITARY"
+    ],
+    [
+      "MLB",
+      "MAKOLAB"
+    ],
+    [
+      "MLM",
+      "MILISYS"
+    ],
+    [
+      "MLP",
+      "MILKPOL"
+    ],
+    [
+      "MLT",
+      "MOONLIT"
+    ],
+    [
+      "MMC",
+      "MMCPL"
+    ],
+    [
+      "MMS",
+      "MADMIND"
+    ],
+    [
+      "MND",
+      "MINERAL"
+    ],
+    [
+      "MNS",
+      "MENNICASK"
+    ],
+    [
+      "MNX",
+      "MINOX"
+    ],
+    [
+      "MO2",
+      "MOLIERA2"
+    ],
+    [
+      "MPS",
+      "MEGAPIXEL"
+    ],
+    [
+      "MPY",
+      "MPAY"
+    ],
+    [
+      "MRA",
+      "MAKORA"
+    ],
+    [
+      "MRD",
+      "MEDARD"
+    ],
+    [
+      "MRG",
+      "MERLINGRP"
+    ],
+    [
+      "MRH",
+      "HAMBURGER"
+    ],
+    [
+      "MRK",
+      "MARKA"
+    ],
+    [
+      "MSM",
+      "MSM"
+    ],
+    [
+      "MTE",
+      "MTENERGIA"
+    ],
+    [
+      "MTN",
+      "MILTON"
+    ],
+    [
+      "MTR",
+      "MOTORICUS"
+    ],
+    [
+      "MTS",
+      "MTRANS"
+    ],
+    [
+      "MUN",
+      "MUNAR"
+    ],
+    [
+      "MXP",
+      "MAXIPIZZA"
+    ],
+    [
+      "NFP",
+      "NFPL"
+    ],
+    [
+      "NOB",
+      "NOOBZ"
+    ],
+    [
+      "NOV",
+      "NOVINA"
+    ],
+    [
+      "NRS",
+      "NEURONE"
+    ],
+    [
+      "NST",
+      "NESTMEDIC"
+    ],
+    [
+      "NTS",
+      "NOTORIA"
+    ],
+    [
+      "NTV",
+      "NTVSA"
+    ],
+    [
+      "NWA",
+      "NWAI"
+    ],
+    [
+      "O2T",
+      "ONE2TRIBE"
+    ],
+    [
+      "OLY",
+      "OLYMP"
+    ],
+    [
+      "ONC",
+      "ONICO"
+    ],
+    [
+      "ONE",
+      "1SOLUTION"
+    ],
+    [
+      "OPI",
+      "OPTIGIS"
+    ],
+    [
+      "ORG",
+      "ORGANIC"
+    ],
+    [
+      "ORL",
+      "ORZLOPONY"
+    ],
+    [
+      "OUT",
+      "OUTDOORZY"
+    ],
+    [
+      "OVI",
+      "OVIDWORKS"
+    ],
+    [
+      "OXY",
+      "OXYGEN"
+    ],
+    [
+      "OZE",
+      "OZECAPITAL"
+    ],
+    [
+      "P24",
+      "PRESENT24"
+    ],
+    [
+      "P2B",
+      "PLANETB2B"
+    ],
+    [
+      "P2C",
+      "P2CHILL"
+    ],
+    [
+      "PAC",
+      "PROACTA"
+    ],
+    [
+      "PBB",
+      "PREFABET"
+    ],
+    [
+      "PBT",
+      "PBGAMES"
+    ],
+    [
+      "PDG",
+      "PYRAMID"
+    ],
+    [
+      "PFG",
+      "PREFAGRP"
+    ],
+    [
+      "PGG",
+      "PROGUNSGR"
+    ],
+    [
+      "PIG",
+      "PLANETINN"
+    ],
+    [
+      "PIT",
+      "POLARISIT"
+    ],
+    [
+      "PIX",
+      "PIXELCROW"
+    ],
+    [
+      "PLE",
+      "PROPERTYF"
+    ],
+    [
+      "PLG",
+      "PLGROUP"
+    ],
+    [
+      "PLI",
+      "PLATIGE"
+    ],
+    [
+      "PLM",
+      "POLMAN"
+    ],
+    [
+      "PLT",
+      "PLOTTWIST"
+    ],
+    [
+      "PME",
+      "POLMT"
+    ],
+    [
+      "PNT",
+      "POINTPACK"
+    ],
+    [
+      "PNW",
+      "PLANTWEAR"
+    ],
+    [
+      "PPG",
+      "PUNCHPUNK"
+    ],
+    [
+      "PRA",
+      "PRIME"
+    ],
+    [
+      "PRE",
+      "PRESIDENT"
+    ],
+    [
+      "PRH",
+      "POLHOLROZ"
+    ],
+    [
+      "PRN",
+      "PARTNER"
+    ],
+    [
+      "PRO",
+      "PROMISE"
+    ],
+    [
+      "PRS",
+      "PRYMUS"
+    ],
+    [
+      "PSH",
+      "POLYSLASH"
+    ],
+    [
+      "PSM",
+      "PLASMA"
+    ],
+    [
+      "PST",
+      "PRESTO"
+    ],
+    [
+      "PTE",
+      "PARCELTEC"
+    ],
+    [
+      "PTN",
+      "POLTRONIC"
+    ],
+    [
+      "QON",
+      "QUARTICON"
+    ],
+    [
+      "QUB",
+      "QUBICGMS"
+    ],
+    [
+      "RAY",
+      "PURPLERAY"
+    ],
+    [
+      "RBS",
+      "ROBINSON"
+    ],
+    [
+      "RCA",
+      "ROCCA"
+    ],
+    [
+      "RCM",
+      "REDCARPET"
+    ],
+    [
+      "RCW",
+      "RUCHCHORZ"
+    ],
+    [
+      "RDG",
+      "READGENE"
+    ],
+    [
+      "REM",
+      "REMEDIS"
+    ],
+    [
+      "REV",
+      "REVITUM"
+    ],
+    [
+      "RGL",
+      "ROBSGROUP"
+    ],
+    [
+      "RKG",
+      "ROCKGAME"
+    ],
+    [
+      "RNT",
+      "PRIVRNT"
+    ],
+    [
+      "ROV",
+      "ROVITA"
+    ],
+    [
+      "RRH",
+      "RRHGROUP"
+    ],
+    [
+      "RSG",
+      "RSGAMES"
+    ],
+    [
+      "RSP",
+      "REMORSOL"
+    ],
+    [
+      "RST",
+      "ROAD"
+    ],
+    [
+      "S4E",
+      "S4E"
+    ],
+    [
+      "SBE",
+      "SOFTBLUE"
+    ],
+    [
+      "SCS",
+      "STEMCELLS"
+    ],
+    [
+      "SDS",
+      "SDSOPTIC"
+    ],
+    [
+      "SED",
+      "SEDIVIO"
+    ],
+    [
+      "SEV",
+      "SEVENET"
+    ],
+    [
+      "SFD",
+      "SFD"
+    ],
+    [
+      "SFK",
+      "SFKPOLKAP"
+    ],
+    [
+      "SGD",
+      "SIGMADEF"
+    ],
+    [
+      "SHY",
+      "SHEEPYARD"
+    ],
+    [
+      "SIN",
+      "SOLARINOV"
+    ],
+    [
+      "SKN",
+      "SAKANA"
+    ],
+    [
+      "SKY",
+      "STOHID"
+    ],
+    [
+      "SLT",
+      "SAULETECH"
+    ],
+    [
+      "SMT",
+      "SIMTERACT"
+    ],
+    [
+      "SNG",
+      "SYNERGA"
+    ],
+    [
+      "SNN",
+      "SUNNET"
+    ],
+    [
+      "SOK",
+      "SONKA"
+    ],
+    [
+      "SP1",
+      "SPAC1"
+    ],
+    [
+      "STA",
+      "STARWARD"
+    ],
+    [
+      "STD",
+      "STANDREW"
+    ],
+    [
+      "STI",
+      "STILO"
+    ],
+    [
+      "SUN",
+      "SUNTECH"
+    ],
+    [
+      "SWM",
+      "SWMANSION"
+    ],
+    [
+      "SYG",
+      "SYGNIS"
+    ],
+    [
+      "SYM",
+      "SYMBIO"
+    ],
+    [
+      "SZR",
+      "SZAR"
+    ],
+    [
+      "TCR",
+      "TECHROBOT"
+    ],
+    [
+      "TEC",
+      "TECNTICA"
+    ],
+    [
+      "TGG",
+      "TRIGGO"
+    ],
+    [
+      "TGS",
+      "TRUEGS"
+    ],
+    [
+      "THD",
+      "THEDUST"
+    ],
+    [
+      "TLG",
+      "TELGAM"
+    ],
+    [
+      "TLO",
+      "TELESTO"
+    ],
+    [
+      "TLS",
+      "TELESTR"
+    ],
+    [
+      "TME",
+      "TERMOEXP"
+    ],
+    [
+      "TMP",
+      "TELEMEDPL"
+    ],
+    [
+      "TNT",
+      "TNTPROENR"
+    ],
+    [
+      "TOS",
+      "TAMEX"
+    ],
+    [
+      "TRX",
+      "TREX"
+    ],
+    [
+      "TXN",
+      "TAXNET"
+    ],
+    [
+      "UFC",
+      "UNIFIED"
+    ],
+    [
+      "UFG",
+      "UFGAMES"
+    ],
+    [
+      "UNV",
+      "UNIVERSE"
+    ],
+    [
+      "VAI",
+      "VOLARIA"
+    ],
+    [
+      "VAR",
+      "VARSAV"
+    ],
+    [
+      "VDS",
+      "VIDIS"
+    ],
+    [
+      "VEE",
+      "VEE"
+    ],
+    [
+      "VEL",
+      "VELTO"
+    ],
+    [
+      "VER",
+      "MPLVERBUM"
+    ],
+    [
+      "VFA",
+      "VRFABRIC"
+    ],
+    [
+      "VIA",
+      "VIATRON"
+    ],
+    [
+      "VIV",
+      "VISION"
+    ],
+    [
+      "VLT",
+      "VOOLT"
+    ],
+    [
+      "VMX",
+      "VMAXSA"
+    ],
+    [
+      "VRB",
+      "VERBICOM"
+    ],
+    [
+      "WBY",
+      "WBAY"
+    ],
+    [
+      "WGP",
+      "WGPARTNER"
+    ],
+    [
+      "WHH",
+      "WERTHHOLZ"
+    ],
+    [
+      "WLI",
+      "WILDINT"
+    ],
+    [
+      "WOD",
+      "WODKAN"
+    ],
+    [
+      "WRE",
+      "WESTREAL"
+    ],
+    [
+      "WRL",
+      "WIERZYCL"
+    ],
+    [
+      "WTF",
+      "WOLFSTF"
+    ],
+    [
+      "XBS",
+      "XBSPROLOG"
+    ],
+    [
+      "XDD",
+      "MENTZEN"
+    ],
+    [
+      "YBS",
+      "YBS"
+    ],
+    [
+      "YOS",
+      "YOSHI"
+    ],
+    [
+      "ZEN",
+      "ZENERIS"
+    ],
+    [
+      "ZRX",
+      "ZORTRAX"
+    ]
+  ]
 }

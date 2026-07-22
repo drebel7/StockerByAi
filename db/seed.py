@@ -22,12 +22,25 @@ def seed_data_sources(session):
 
 
 CATEGORY_NAMES = [
-    "drones", "AI", "silver_mining", "gold", "SMR",
-    "RAM_memory", "space_industry", "semiconductors",
-    "cloud_computing", "cybersecurity", "fintech",
-    "biotechnology", "renewable_energy", "EV",
-    "defense", "gaming", "REIT", "robotics", "blockchain",
+    "AI", "drones", "semiconductors", "silver_mining", "gold",
+    "SMR", "RAM_memory", "space_industry", "cloud_computing",
+    "cybersecurity", "fintech", "biotechnology", "renewable_energy",
+    "EV", "defense", "gaming", "REIT", "robotics", "blockchain",
     "telecom", "pharmaceuticals", "consumer_staples",
+    "banks", "insurance", "investment_management",
+    "technology", "software", "it_consulting",
+    "ecommerce", "retail",
+    "real_estate", "construction",
+    "energy", "utilities",
+    "manufacturing",
+    "mining", "steel", "chemicals",
+    "agriculture", "food", "beverages",
+    "media", "transportation", "automotive",
+    "wood_paper", "textiles",
+    "healthcare", "medical_devices",
+    "education", "hotel_tourism",
+    "waste_management", "holding",
+    "business_services",
 ]
 
 
